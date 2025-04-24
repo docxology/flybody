@@ -1,0 +1,463 @@
+Starting flybody setup and test script...
+Full log will be available at: /home/trim/Documents/GitHub/flybody/daf/output/logs/setup_log.txt
+All outputs will be saved to: /home/trim/Documents/GitHub/flybody/daf/output
+Date: Thu Apr 24 10:06:13 AM PDT 2025
+Current working directory: /home/trim/Documents/GitHub/flybody/daf
+Script directory: /home/trim/Documents/GitHub/flybody/daf
+Repository directory: /home/trim/Documents/GitHub/flybody
+----------------------------------------
+
+========================================
+========================================
+STEP: Verifying script location and environment
+STEP: Verifying script location and environment
+========================================
+========================================
+Verified repository structure at: /home/trim/Documents/GitHub/flybody
+Verified Python 3 installation: Python 3.10.12
+
+========================================
+========================================
+STEP: Setting up Python environment
+STEP: Setting up Python environment
+========================================
+========================================
+Conda not found. Using Python virtual environment instead.
+Using existing virtual environment in /home/trim/Documents/GitHub/flybody/daf/venv...
+Activating virtual environment...
+Requirement already satisfied: pip in ./daf/venv/lib/python3.10/site-packages (25.0.1)
+Using Python: Python 3.10.12
+Environment: /home/trim/Documents/GitHub/flybody/daf/venv/bin/python
+Pip: pip 25.0.1 from /home/trim/Documents/GitHub/flybody/daf/venv/lib/python3.10/site-packages/pip (python 3.10)
+
+========================================
+========================================
+STEP: Installing flybody package (Mode: core)
+STEP: Installing flybody package (Mode: core)
+========================================
+========================================
+Using pip from: /home/trim/Documents/GitHub/flybody/daf/venv/bin/pip
+Obtaining file:///home/trim/Documents/GitHub/flybody
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Requirement already satisfied: numpy==1.26.4 in ./daf/venv/lib/python3.10/site-packages (from flybody==0.1.0) (1.26.4)
+Requirement already satisfied: dm_control in ./daf/venv/lib/python3.10/site-packages (from flybody==0.1.0) (1.0.28)
+Requirement already satisfied: h5py in ./daf/venv/lib/python3.10/site-packages (from flybody==0.1.0) (3.13.0)
+Requirement already satisfied: pytest in ./daf/venv/lib/python3.10/site-packages (from flybody==0.1.0) (8.3.5)
+Requirement already satisfied: mediapy in ./daf/venv/lib/python3.10/site-packages (from flybody==0.1.0) (1.2.3)
+Requirement already satisfied: absl-py>=0.7.0 in ./daf/venv/lib/python3.10/site-packages (from dm_control->flybody==0.1.0) (2.2.2)
+Requirement already satisfied: dm-env in ./daf/venv/lib/python3.10/site-packages (from dm_control->flybody==0.1.0) (1.6)
+Requirement already satisfied: dm-tree!=0.1.2 in ./daf/venv/lib/python3.10/site-packages (from dm_control->flybody==0.1.0) (0.1.9)
+Requirement already satisfied: glfw in ./daf/venv/lib/python3.10/site-packages (from dm_control->flybody==0.1.0) (2.9.0)
+Requirement already satisfied: labmaze in ./daf/venv/lib/python3.10/site-packages (from dm_control->flybody==0.1.0) (1.0.6)
+Requirement already satisfied: lxml in ./daf/venv/lib/python3.10/site-packages (from dm_control->flybody==0.1.0) (5.4.0)
+Requirement already satisfied: mujoco>=3.2.7 in ./daf/venv/lib/python3.10/site-packages (from dm_control->flybody==0.1.0) (3.3.1)
+Requirement already satisfied: protobuf>=3.19.4 in ./daf/venv/lib/python3.10/site-packages (from dm_control->flybody==0.1.0) (6.30.2)
+Requirement already satisfied: pyopengl>=3.1.4 in ./daf/venv/lib/python3.10/site-packages (from dm_control->flybody==0.1.0) (3.1.9)
+Requirement already satisfied: pyparsing>=3.0.0 in ./daf/venv/lib/python3.10/site-packages (from dm_control->flybody==0.1.0) (3.2.3)
+Requirement already satisfied: requests in ./daf/venv/lib/python3.10/site-packages (from dm_control->flybody==0.1.0) (2.32.3)
+Requirement already satisfied: setuptools!=50.0.0 in ./daf/venv/lib/python3.10/site-packages (from dm_control->flybody==0.1.0) (59.6.0)
+Requirement already satisfied: scipy in ./daf/venv/lib/python3.10/site-packages (from dm_control->flybody==0.1.0) (1.15.2)
+Requirement already satisfied: tqdm in ./daf/venv/lib/python3.10/site-packages (from dm_control->flybody==0.1.0) (4.67.1)
+Requirement already satisfied: ipython in ./daf/venv/lib/python3.10/site-packages (from mediapy->flybody==0.1.0) (8.35.0)
+Requirement already satisfied: matplotlib in ./daf/venv/lib/python3.10/site-packages (from mediapy->flybody==0.1.0) (3.10.1)
+Requirement already satisfied: Pillow in ./daf/venv/lib/python3.10/site-packages (from mediapy->flybody==0.1.0) (11.2.1)
+Requirement already satisfied: exceptiongroup>=1.0.0rc8 in ./daf/venv/lib/python3.10/site-packages (from pytest->flybody==0.1.0) (1.2.2)
+Requirement already satisfied: iniconfig in ./daf/venv/lib/python3.10/site-packages (from pytest->flybody==0.1.0) (2.1.0)
+Requirement already satisfied: packaging in ./daf/venv/lib/python3.10/site-packages (from pytest->flybody==0.1.0) (25.0)
+Requirement already satisfied: pluggy<2,>=1.5 in ./daf/venv/lib/python3.10/site-packages (from pytest->flybody==0.1.0) (1.5.0)
+Requirement already satisfied: tomli>=1 in ./daf/venv/lib/python3.10/site-packages (from pytest->flybody==0.1.0) (2.2.1)
+Requirement already satisfied: attrs>=18.2.0 in ./daf/venv/lib/python3.10/site-packages (from dm-tree!=0.1.2->dm_control->flybody==0.1.0) (25.3.0)
+Requirement already satisfied: wrapt>=1.11.2 in ./daf/venv/lib/python3.10/site-packages (from dm-tree!=0.1.2->dm_control->flybody==0.1.0) (1.17.2)
+Requirement already satisfied: etils[epath] in ./daf/venv/lib/python3.10/site-packages (from mujoco>=3.2.7->dm_control->flybody==0.1.0) (1.12.2)
+Requirement already satisfied: decorator in ./daf/venv/lib/python3.10/site-packages (from ipython->mediapy->flybody==0.1.0) (5.2.1)
+Requirement already satisfied: jedi>=0.16 in ./daf/venv/lib/python3.10/site-packages (from ipython->mediapy->flybody==0.1.0) (0.19.2)
+Requirement already satisfied: matplotlib-inline in ./daf/venv/lib/python3.10/site-packages (from ipython->mediapy->flybody==0.1.0) (0.1.7)
+Requirement already satisfied: pexpect>4.3 in ./daf/venv/lib/python3.10/site-packages (from ipython->mediapy->flybody==0.1.0) (4.9.0)
+Requirement already satisfied: prompt_toolkit<3.1.0,>=3.0.41 in ./daf/venv/lib/python3.10/site-packages (from ipython->mediapy->flybody==0.1.0) (3.0.51)
+Requirement already satisfied: pygments>=2.4.0 in ./daf/venv/lib/python3.10/site-packages (from ipython->mediapy->flybody==0.1.0) (2.19.1)
+Requirement already satisfied: stack_data in ./daf/venv/lib/python3.10/site-packages (from ipython->mediapy->flybody==0.1.0) (0.6.3)
+Requirement already satisfied: traitlets>=5.13.0 in ./daf/venv/lib/python3.10/site-packages (from ipython->mediapy->flybody==0.1.0) (5.14.3)
+Requirement already satisfied: typing_extensions>=4.6 in ./daf/venv/lib/python3.10/site-packages (from ipython->mediapy->flybody==0.1.0) (4.13.2)
+Requirement already satisfied: contourpy>=1.0.1 in ./daf/venv/lib/python3.10/site-packages (from matplotlib->mediapy->flybody==0.1.0) (1.3.2)
+Requirement already satisfied: cycler>=0.10 in ./daf/venv/lib/python3.10/site-packages (from matplotlib->mediapy->flybody==0.1.0) (0.12.1)
+Requirement already satisfied: fonttools>=4.22.0 in ./daf/venv/lib/python3.10/site-packages (from matplotlib->mediapy->flybody==0.1.0) (4.57.0)
+Requirement already satisfied: kiwisolver>=1.3.1 in ./daf/venv/lib/python3.10/site-packages (from matplotlib->mediapy->flybody==0.1.0) (1.4.8)
+Requirement already satisfied: python-dateutil>=2.7 in ./daf/venv/lib/python3.10/site-packages (from matplotlib->mediapy->flybody==0.1.0) (2.9.0.post0)
+Requirement already satisfied: charset-normalizer<4,>=2 in ./daf/venv/lib/python3.10/site-packages (from requests->dm_control->flybody==0.1.0) (3.4.1)
+Requirement already satisfied: idna<4,>=2.5 in ./daf/venv/lib/python3.10/site-packages (from requests->dm_control->flybody==0.1.0) (3.10)
+Requirement already satisfied: urllib3<3,>=1.21.1 in ./daf/venv/lib/python3.10/site-packages (from requests->dm_control->flybody==0.1.0) (2.4.0)
+Requirement already satisfied: certifi>=2017.4.17 in ./daf/venv/lib/python3.10/site-packages (from requests->dm_control->flybody==0.1.0) (2025.1.31)
+Requirement already satisfied: parso<0.9.0,>=0.8.4 in ./daf/venv/lib/python3.10/site-packages (from jedi>=0.16->ipython->mediapy->flybody==0.1.0) (0.8.4)
+Requirement already satisfied: ptyprocess>=0.5 in ./daf/venv/lib/python3.10/site-packages (from pexpect>4.3->ipython->mediapy->flybody==0.1.0) (0.7.0)
+Requirement already satisfied: wcwidth in ./daf/venv/lib/python3.10/site-packages (from prompt_toolkit<3.1.0,>=3.0.41->ipython->mediapy->flybody==0.1.0) (0.2.13)
+Requirement already satisfied: six>=1.5 in ./daf/venv/lib/python3.10/site-packages (from python-dateutil>=2.7->matplotlib->mediapy->flybody==0.1.0) (1.17.0)
+Requirement already satisfied: fsspec in ./daf/venv/lib/python3.10/site-packages (from etils[epath]->mujoco>=3.2.7->dm_control->flybody==0.1.0) (2025.3.2)
+Requirement already satisfied: importlib_resources in ./daf/venv/lib/python3.10/site-packages (from etils[epath]->mujoco>=3.2.7->dm_control->flybody==0.1.0) (6.5.2)
+Requirement already satisfied: zipp in ./daf/venv/lib/python3.10/site-packages (from etils[epath]->mujoco>=3.2.7->dm_control->flybody==0.1.0) (3.21.0)
+Requirement already satisfied: executing>=1.2.0 in ./daf/venv/lib/python3.10/site-packages (from stack_data->ipython->mediapy->flybody==0.1.0) (2.2.0)
+Requirement already satisfied: asttokens>=2.1.0 in ./daf/venv/lib/python3.10/site-packages (from stack_data->ipython->mediapy->flybody==0.1.0) (3.0.0)
+Requirement already satisfied: pure-eval in ./daf/venv/lib/python3.10/site-packages (from stack_data->ipython->mediapy->flybody==0.1.0) (0.2.3)
+Building wheels for collected packages: flybody
+  Building editable for flybody (pyproject.toml): started
+  Building editable for flybody (pyproject.toml): finished with status 'done'
+  Created wheel for flybody: filename=flybody-0.1.0-0.editable-py3-none-any.whl size=13766 sha256=ce2ce8ebe2861d99f1c60c67cc4f97d05c0ca8d08ddbd4363d5e5df75fb2128b
+  Stored in directory: /tmp/pip-ephem-wheel-cache-wzkvi99q/wheels/a3/e3/b1/a6f3d503b4484a611bc01ddc418037dbcaf287d96b55f369af
+Successfully built flybody
+Installing collected packages: flybody
+  Attempting uninstall: flybody
+    Found existing installation: flybody 0.1.0
+    Uninstalling flybody-0.1.0:
+      Successfully uninstalled flybody-0.1.0
+Successfully installed flybody-0.1.0
+flybody installation (Mode: core) complete.
+Installing additional packages for examples and visualizations...
+Requirement already satisfied: mediapy in ./daf/venv/lib/python3.10/site-packages (1.2.3)
+Requirement already satisfied: pytest in ./daf/venv/lib/python3.10/site-packages (8.3.5)
+Requirement already satisfied: matplotlib in ./daf/venv/lib/python3.10/site-packages (3.10.1)
+Requirement already satisfied: ipython in ./daf/venv/lib/python3.10/site-packages (from mediapy) (8.35.0)
+Requirement already satisfied: numpy in ./daf/venv/lib/python3.10/site-packages (from mediapy) (1.26.4)
+Requirement already satisfied: Pillow in ./daf/venv/lib/python3.10/site-packages (from mediapy) (11.2.1)
+Requirement already satisfied: exceptiongroup>=1.0.0rc8 in ./daf/venv/lib/python3.10/site-packages (from pytest) (1.2.2)
+Requirement already satisfied: iniconfig in ./daf/venv/lib/python3.10/site-packages (from pytest) (2.1.0)
+Requirement already satisfied: packaging in ./daf/venv/lib/python3.10/site-packages (from pytest) (25.0)
+Requirement already satisfied: pluggy<2,>=1.5 in ./daf/venv/lib/python3.10/site-packages (from pytest) (1.5.0)
+Requirement already satisfied: tomli>=1 in ./daf/venv/lib/python3.10/site-packages (from pytest) (2.2.1)
+Requirement already satisfied: contourpy>=1.0.1 in ./daf/venv/lib/python3.10/site-packages (from matplotlib) (1.3.2)
+Requirement already satisfied: cycler>=0.10 in ./daf/venv/lib/python3.10/site-packages (from matplotlib) (0.12.1)
+Requirement already satisfied: fonttools>=4.22.0 in ./daf/venv/lib/python3.10/site-packages (from matplotlib) (4.57.0)
+Requirement already satisfied: kiwisolver>=1.3.1 in ./daf/venv/lib/python3.10/site-packages (from matplotlib) (1.4.8)
+Requirement already satisfied: pyparsing>=2.3.1 in ./daf/venv/lib/python3.10/site-packages (from matplotlib) (3.2.3)
+Requirement already satisfied: python-dateutil>=2.7 in ./daf/venv/lib/python3.10/site-packages (from matplotlib) (2.9.0.post0)
+Requirement already satisfied: six>=1.5 in ./daf/venv/lib/python3.10/site-packages (from python-dateutil>=2.7->matplotlib) (1.17.0)
+Requirement already satisfied: decorator in ./daf/venv/lib/python3.10/site-packages (from ipython->mediapy) (5.2.1)
+Requirement already satisfied: jedi>=0.16 in ./daf/venv/lib/python3.10/site-packages (from ipython->mediapy) (0.19.2)
+Requirement already satisfied: matplotlib-inline in ./daf/venv/lib/python3.10/site-packages (from ipython->mediapy) (0.1.7)
+Requirement already satisfied: pexpect>4.3 in ./daf/venv/lib/python3.10/site-packages (from ipython->mediapy) (4.9.0)
+Requirement already satisfied: prompt_toolkit<3.1.0,>=3.0.41 in ./daf/venv/lib/python3.10/site-packages (from ipython->mediapy) (3.0.51)
+Requirement already satisfied: pygments>=2.4.0 in ./daf/venv/lib/python3.10/site-packages (from ipython->mediapy) (2.19.1)
+Requirement already satisfied: stack_data in ./daf/venv/lib/python3.10/site-packages (from ipython->mediapy) (0.6.3)
+Requirement already satisfied: traitlets>=5.13.0 in ./daf/venv/lib/python3.10/site-packages (from ipython->mediapy) (5.14.3)
+Requirement already satisfied: typing_extensions>=4.6 in ./daf/venv/lib/python3.10/site-packages (from ipython->mediapy) (4.13.2)
+Requirement already satisfied: parso<0.9.0,>=0.8.4 in ./daf/venv/lib/python3.10/site-packages (from jedi>=0.16->ipython->mediapy) (0.8.4)
+Requirement already satisfied: ptyprocess>=0.5 in ./daf/venv/lib/python3.10/site-packages (from pexpect>4.3->ipython->mediapy) (0.7.0)
+Requirement already satisfied: wcwidth in ./daf/venv/lib/python3.10/site-packages (from prompt_toolkit<3.1.0,>=3.0.41->ipython->mediapy) (0.2.13)
+Requirement already satisfied: executing>=1.2.0 in ./daf/venv/lib/python3.10/site-packages (from stack_data->ipython->mediapy) (2.2.0)
+Requirement already satisfied: asttokens>=2.1.0 in ./daf/venv/lib/python3.10/site-packages (from stack_data->ipython->mediapy) (3.0.0)
+Requirement already satisfied: pure-eval in ./daf/venv/lib/python3.10/site-packages (from stack_data->ipython->mediapy) (0.2.3)
+Installed packages:
+flybody             0.1.0       /home/trim/Documents/GitHub/flybody
+matplotlib          3.10.1
+matplotlib-inline   0.1.7
+mediapy             1.2.3
+pytest              8.3.5
+
+========================================
+========================================
+STEP: Environment Variable Configuration Notes (User Action May Be Required)
+STEP: Environment Variable Configuration Notes (User Action May Be Required)
+========================================
+========================================
+The following environment variables might be needed for specific functionalities:
+
+1. MuJoCo Rendering:
+   For rendering using specific hardware backends (like EGL on headless servers).
+   Uncomment and set these if needed, especially if you encounter rendering issues:
+   # export MUJOCO_GL=egl
+   # export MUJOCO_EGL_DEVICE_ID=0  # Adjust '0' based on your GPU ID
+
+
+========================================
+========================================
+STEP: Running tests with pytest
+STEP: Running tests with pytest
+========================================
+========================================
+Running pytest...
+============================= test session starts ==============================
+platform linux -- Python 3.10.12, pytest-8.3.5, pluggy-1.5.0 -- /home/trim/Documents/GitHub/flybody/daf/venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/trim/Documents/GitHub/flybody
+configfile: pyproject.toml
+collecting ... collected 18 items
+
+tests/test_core.py::test_can_create_and_run_environment PASSED           [  5%]
+tests/test_core.py::test_action_corruptor PASSED                         [ 11%]
+tests/test_core.py::test_ctrl_callback PASSED                            [ 16%]
+tests/test_flybare.py::test_fly_parameters PASSED                        [ 22%]
+tests/test_flybare.py::test_fly_masses PASSED                            [ 27%]
+tests/test_flybare.py::test_control_ranges_match_joint_ranges PASSED     [ 33%]
+tests/test_flybare.py::test_can_compile_and_step_simulation PASSED       [ 38%]
+tests/test_flywalker.py::test_fly_bulletproof PASSED                     [ 44%]
+tests/test_flywalker.py::test_force_actuators PASSED                     [ 50%]
+tests/test_flywalker.py::test_filterexact PASSED                         [ 55%]
+tests/test_flywalker.py::test_prev_action PASSED                         [ 61%]
+tests/test_flywalker.py::test_evaluate_observables PASSED                [ 66%]
+tests/test_flywalker.py::test_proprioception PASSED                      [ 72%]
+tests/test_flywalker.py::test_vestibular PASSED                          [ 77%]
+tests/test_flywalker.py::test_orientation PASSED                         [ 83%]
+tests/test_flywalker.py::test_set_name PASSED                            [ 88%]
+tests/test_walking_env.py::test_can_create_env_inference_mode PASSED     [ 94%]
+tests/test_walking_env.py::test_can_step_env_inference_mode PASSED       [100%]
+
+======================== 18 passed in 301.69s (0:05:01) ========================
+Test results saved to /home/trim/Documents/GitHub/flybody/daf/output/logs/pytest_output.txt
+
+========================================
+========================================
+STEP: Creating example scripts
+STEP: Creating example scripts
+========================================
+========================================
+Creating walk_imitation example...
+Created example script: /home/trim/Documents/GitHub/flybody/daf/output/examples/walk_imitation.py
+Creating flight_imitation example...
+Created example script: /home/trim/Documents/GitHub/flybody/daf/output/examples/flight_imitation.py
+Creating walk_on_ball example...
+Created example script: /home/trim/Documents/GitHub/flybody/daf/output/examples/walk_on_ball.py
+Creating vision_guided_flight example...
+Created example script: /home/trim/Documents/GitHub/flybody/daf/output/examples/vision_guided_flight.py
+Creating template_task example...
+Created example script: /home/trim/Documents/GitHub/flybody/daf/output/examples/template_task.py
+Creating combined example...
+Created example scripts in /home/trim/Documents/GitHub/flybody/daf/output/examples
+Detected X display server. Will run examples with visualizations.
+
+========================================
+========================================
+STEP: Running example: walk_imitation
+STEP: Running example: walk_imitation
+========================================
+========================================
+Running walk_imitation example...
+Creating walk_imitation environment...
+Running simulation with random actions...
+Saved frame 0 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_imitation_frame_000.png
+Saved frame 1 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_imitation_frame_001.png
+Saved frame 2 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_imitation_frame_002.png
+Saved frame 3 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_imitation_frame_003.png
+Saved frame 4 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_imitation_frame_004.png
+Saved frame 5 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_imitation_frame_005.png
+Saved frame 6 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_imitation_frame_006.png
+Saved frame 7 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_imitation_frame_007.png
+Saved frame 8 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_imitation_frame_008.png
+Saved frame 9 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_imitation_frame_009.png
+Saved frame 10 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_imitation_frame_010.png
+Saved frame 11 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_imitation_frame_011.png
+Saved frame 12 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_imitation_frame_012.png
+Saved frame 13 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_imitation_frame_013.png
+Saved frame 14 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_imitation_frame_014.png
+Saved frame 15 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_imitation_frame_015.png
+Saved frame 16 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_imitation_frame_016.png
+Saved frame 17 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_imitation_frame_017.png
+Saved frame 18 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_imitation_frame_018.png
+Saved frame 19 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_imitation_frame_019.png
+Saved frame 20 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_imitation_frame_020.png
+Saved frame 21 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_imitation_frame_021.png
+Saved frame 22 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_imitation_frame_022.png
+Saved frame 23 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_imitation_frame_023.png
+Saved frame 24 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_imitation_frame_024.png
+Saved frame 25 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_imitation_frame_025.png
+Saved frame 26 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_imitation_frame_026.png
+Saved frame 27 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_imitation_frame_027.png
+Saved frame 28 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_imitation_frame_028.png
+Saved frame 29 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_imitation_frame_029.png
+Saving animation...
+Saved animation to /home/trim/Documents/GitHub/flybody/daf/output/animations/walk_imitation.mp4
+Creating multi-view animation...
+Saved multi-view animation to /home/trim/Documents/GitHub/flybody/daf/output/animations/walk_imitation_multiview.mp4
+Example completed successfully!
+
+========================================
+========================================
+STEP: Running example: flight_imitation
+STEP: Running example: flight_imitation
+========================================
+========================================
+Running flight_imitation example...
+Traceback (most recent call last):
+  File "/home/trim/Documents/GitHub/flybody/daf/output/examples/flight_imitation.py", line 29, in <module>
+    timestep = env.step(action)
+  File "/home/trim/Documents/GitHub/flybody/daf/venv/lib/python3.10/site-packages/dm_control/composer/environment.py", line 418, in step
+    self._hooks.before_step(self._physics_proxy, action, self._random_state)
+  File "/home/trim/Documents/GitHub/flybody/daf/venv/lib/python3.10/site-packages/dm_control/composer/environment.py", line 137, in before_step
+    self._task.before_step(physics, action, random_state)
+  File "/home/trim/Documents/GitHub/flybody/flybody/tasks/flight_imitation.py", line 168, in before_step
+    super().before_step(physics, action, random_state)
+  File "/home/trim/Documents/GitHub/flybody/flybody/tasks/base.py", line 198, in before_step
+    self._walker.apply_action(physics, action, random_state)
+  File "/home/trim/Documents/GitHub/flybody/flybody/fruitfly/fruitfly.py", line 534, in apply_action
+    self._prev_action[:] = action
+ValueError: could not broadcast input array from shape (36,) into shape (12,)
+Creating flight_imitation environment...
+Running simulation with random actions...
+Saved frame 0 to /home/trim/Documents/GitHub/flybody/daf/output/images/flight_imitation_frame_000.png
+Error running example: could not broadcast input array from shape (36,) into shape (12,)
+
+========================================
+========================================
+STEP: Running example: walk_on_ball
+STEP: Running example: walk_on_ball
+========================================
+========================================
+Running walk_on_ball example...
+Creating walk_on_ball environment...
+Running simulation with random actions...
+Saved frame 0 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_000.png
+Saved frame 1 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_001.png
+Saved frame 2 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_002.png
+Saved frame 3 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_003.png
+Saved frame 4 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_004.png
+Saved frame 5 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_005.png
+Saved frame 6 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_006.png
+Saved frame 7 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_007.png
+Saved frame 8 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_008.png
+Saved frame 9 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_009.png
+Saved frame 10 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_010.png
+Saved frame 11 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_011.png
+Saved frame 12 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_012.png
+Saved frame 13 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_013.png
+Saved frame 14 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_014.png
+Saved frame 15 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_015.png
+Saved frame 16 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_016.png
+Saved frame 17 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_017.png
+Saved frame 18 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_018.png
+Saved frame 19 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_019.png
+Saved frame 20 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_020.png
+Saved frame 21 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_021.png
+Saved frame 22 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_022.png
+Saved frame 23 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_023.png
+Saved frame 24 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_024.png
+Saved frame 25 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_025.png
+Saved frame 26 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_026.png
+Saved frame 27 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_027.png
+Saved frame 28 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_028.png
+Saved frame 29 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_029.png
+Saved frame 30 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_030.png
+Saved frame 31 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_031.png
+Saved frame 32 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_032.png
+Saved frame 33 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_033.png
+Saved frame 34 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_034.png
+Saved frame 35 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_035.png
+Saved frame 36 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_036.png
+Saved frame 37 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_037.png
+Saved frame 38 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_038.png
+Saved frame 39 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_039.png
+Saving animation...
+Saved animation to /home/trim/Documents/GitHub/flybody/daf/output/animations/walk_on_ball.mp4
+Creating multi-view animation...
+Saved multi-view animation to /home/trim/Documents/GitHub/flybody/daf/output/animations/walk_on_ball_multiview.mp4
+Example completed successfully!
+
+========================================
+========================================
+STEP: Running example: vision_guided_flight
+STEP: Running example: vision_guided_flight
+========================================
+========================================
+Running vision_guided_flight example...
+Traceback (most recent call last):
+  File "/home/trim/Documents/GitHub/flybody/daf/output/examples/vision_guided_flight.py", line 30, in <module>
+    timestep = env.step(action)
+  File "/home/trim/Documents/GitHub/flybody/daf/venv/lib/python3.10/site-packages/dm_control/composer/environment.py", line 418, in step
+    self._hooks.before_step(self._physics_proxy, action, self._random_state)
+  File "/home/trim/Documents/GitHub/flybody/daf/venv/lib/python3.10/site-packages/dm_control/composer/environment.py", line 137, in before_step
+    self._task.before_step(physics, action, random_state)
+  File "/home/trim/Documents/GitHub/flybody/flybody/tasks/vision_flight.py", line 159, in before_step
+    super().before_step(physics, action, random_state)
+  File "/home/trim/Documents/GitHub/flybody/flybody/tasks/base.py", line 198, in before_step
+    self._walker.apply_action(physics, action, random_state)
+  File "/home/trim/Documents/GitHub/flybody/flybody/fruitfly/fruitfly.py", line 534, in apply_action
+    self._prev_action[:] = action
+ValueError: could not broadcast input array from shape (36,) into shape (12,)
+Creating vision_guided_flight environment...
+Running simulation with random actions...
+Saved frame 0 to /home/trim/Documents/GitHub/flybody/daf/output/images/vision_guided_flight_frame_000.png
+Error running example: could not broadcast input array from shape (36,) into shape (12,)
+
+========================================
+========================================
+STEP: Running example: template_task
+STEP: Running example: template_task
+========================================
+========================================
+Running template_task example...
+Creating template_task environment...
+Running simulation with random actions...
+Saved frame 0 to /home/trim/Documents/GitHub/flybody/daf/output/images/template_task_frame_000.png
+Saved frame 1 to /home/trim/Documents/GitHub/flybody/daf/output/images/template_task_frame_001.png
+Saved frame 2 to /home/trim/Documents/GitHub/flybody/daf/output/images/template_task_frame_002.png
+Saved frame 3 to /home/trim/Documents/GitHub/flybody/daf/output/images/template_task_frame_003.png
+Saved frame 4 to /home/trim/Documents/GitHub/flybody/daf/output/images/template_task_frame_004.png
+Saved frame 5 to /home/trim/Documents/GitHub/flybody/daf/output/images/template_task_frame_005.png
+Saved frame 6 to /home/trim/Documents/GitHub/flybody/daf/output/images/template_task_frame_006.png
+Saved frame 7 to /home/trim/Documents/GitHub/flybody/daf/output/images/template_task_frame_007.png
+Saved frame 8 to /home/trim/Documents/GitHub/flybody/daf/output/images/template_task_frame_008.png
+Saved frame 9 to /home/trim/Documents/GitHub/flybody/daf/output/images/template_task_frame_009.png
+Saved frame 10 to /home/trim/Documents/GitHub/flybody/daf/output/images/template_task_frame_010.png
+Saved frame 11 to /home/trim/Documents/GitHub/flybody/daf/output/images/template_task_frame_011.png
+Saved frame 12 to /home/trim/Documents/GitHub/flybody/daf/output/images/template_task_frame_012.png
+Saved frame 13 to /home/trim/Documents/GitHub/flybody/daf/output/images/template_task_frame_013.png
+Saved frame 14 to /home/trim/Documents/GitHub/flybody/daf/output/images/template_task_frame_014.png
+Saved frame 15 to /home/trim/Documents/GitHub/flybody/daf/output/images/template_task_frame_015.png
+Saved frame 16 to /home/trim/Documents/GitHub/flybody/daf/output/images/template_task_frame_016.png
+Saved frame 17 to /home/trim/Documents/GitHub/flybody/daf/output/images/template_task_frame_017.png
+Saved frame 18 to /home/trim/Documents/GitHub/flybody/daf/output/images/template_task_frame_018.png
+Saved frame 19 to /home/trim/Documents/GitHub/flybody/daf/output/images/template_task_frame_019.png
+Saving animation...
+Saved animation to /home/trim/Documents/GitHub/flybody/daf/output/animations/template_task.mp4
+Creating multi-view animation...
+Saved multi-view animation to /home/trim/Documents/GitHub/flybody/daf/output/animations/template_task_multiview.mp4
+Example completed successfully!
+
+========================================
+========================================
+STEP: Running combined visualization
+STEP: Running combined visualization
+========================================
+========================================
+Running combined visualization...
+Traceback (most recent call last):
+  File "/home/trim/Documents/GitHub/flybody/daf/output/examples/combined_visualization.py", line 60, in <module>
+    timestep = env.step(action)
+  File "/home/trim/Documents/GitHub/flybody/daf/venv/lib/python3.10/site-packages/dm_control/composer/environment.py", line 418, in step
+    self._hooks.before_step(self._physics_proxy, action, self._random_state)
+  File "/home/trim/Documents/GitHub/flybody/daf/venv/lib/python3.10/site-packages/dm_control/composer/environment.py", line 137, in before_step
+    self._task.before_step(physics, action, random_state)
+  File "/home/trim/Documents/GitHub/flybody/flybody/tasks/flight_imitation.py", line 168, in before_step
+    super().before_step(physics, action, random_state)
+  File "/home/trim/Documents/GitHub/flybody/flybody/tasks/base.py", line 198, in before_step
+    self._walker.apply_action(physics, action, random_state)
+  File "/home/trim/Documents/GitHub/flybody/flybody/fruitfly/fruitfly.py", line 534, in apply_action
+    self._prev_action[:] = action
+ValueError: could not broadcast input array from shape (36,) into shape (12,)
+Creating all environments...
+Running simulations with random actions...
+Running walk_imitation...
+Running flight_imitation...
+Error creating combined visualization: could not broadcast input array from shape (36,) into shape (12,)
+
+========================================
+========================================
+STEP: Script Finished
+STEP: Script Finished
+========================================
+========================================
+----------------------------------------
+ Setup and tests completed successfully.
+ All outputs saved to: /home/trim/Documents/GitHub/flybody/daf/output
+----------------------------------------
+To use the installed environment, activate it in your shell:
+source /home/trim/Documents/GitHub/flybody/daf/venv/bin/activate
+
+To view generated outputs:
+- Logs: /home/trim/Documents/GitHub/flybody/daf/output/logs
+- Images: /home/trim/Documents/GitHub/flybody/daf/output/images
+- Animations: /home/trim/Documents/GitHub/flybody/daf/output/animations
+- Examples: /home/trim/Documents/GitHub/flybody/daf/output/examples
