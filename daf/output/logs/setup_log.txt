@@ -1,8 +1,8 @@
 Starting flybody setup and test script...
 Full log will be available at: /home/trim/Documents/GitHub/flybody/daf/output/logs/setup_log.txt
 All outputs will be saved to: /home/trim/Documents/GitHub/flybody/daf/output
-Date: Thu Apr 24 10:06:13 AM PDT 2025
-Current working directory: /home/trim/Documents/GitHub/flybody/daf
+Date: Thu Apr 24 12:06:08 PM PDT 2025
+Current working directory: /home/trim/Documents/GitHub/flybody
 Script directory: /home/trim/Documents/GitHub/flybody/daf
 Repository directory: /home/trim/Documents/GitHub/flybody
 ----------------------------------------
@@ -32,8 +32,8 @@ Pip: pip 25.0.1 from /home/trim/Documents/GitHub/flybody/daf/venv/lib/python3.10
 
 ========================================
 ========================================
-STEP: Installing flybody package (Mode: core)
-STEP: Installing flybody package (Mode: core)
+STEP: Installing flybody package (Mode: tf)
+STEP: Installing flybody package (Mode: tf)
 ========================================
 ========================================
 Using pip from: /home/trim/Documents/GitHub/flybody/daf/venv/bin/pip
@@ -51,32 +51,87 @@ Requirement already satisfied: dm_control in ./daf/venv/lib/python3.10/site-pack
 Requirement already satisfied: h5py in ./daf/venv/lib/python3.10/site-packages (from flybody==0.1.0) (3.13.0)
 Requirement already satisfied: pytest in ./daf/venv/lib/python3.10/site-packages (from flybody==0.1.0) (8.3.5)
 Requirement already satisfied: mediapy in ./daf/venv/lib/python3.10/site-packages (from flybody==0.1.0) (1.2.3)
-Requirement already satisfied: absl-py>=0.7.0 in ./daf/venv/lib/python3.10/site-packages (from dm_control->flybody==0.1.0) (2.2.2)
-Requirement already satisfied: dm-env in ./daf/venv/lib/python3.10/site-packages (from dm_control->flybody==0.1.0) (1.6)
-Requirement already satisfied: dm-tree!=0.1.2 in ./daf/venv/lib/python3.10/site-packages (from dm_control->flybody==0.1.0) (0.1.9)
+Requirement already satisfied: dm-acme[envs,jax,tf] in ./daf/venv/lib/python3.10/site-packages (from flybody==0.1.0) (0.2.2)
+Requirement already satisfied: nvidia-cudnn-cu11==8.9.* in ./daf/venv/lib/python3.10/site-packages (from flybody==0.1.0) (8.9.6.50)
+Requirement already satisfied: tensorflow==2.8.0 in ./daf/venv/lib/python3.10/site-packages (from flybody==0.1.0) (2.8.0)
+Requirement already satisfied: tensorflow-probability==0.16.0 in ./daf/venv/lib/python3.10/site-packages (from flybody==0.1.0) (0.16.0)
+Requirement already satisfied: dm-reverb==0.7.0 in ./daf/venv/lib/python3.10/site-packages (from flybody==0.1.0) (0.7.0)
+Requirement already satisfied: protobuf==3.20.* in ./daf/venv/lib/python3.10/site-packages (from flybody==0.1.0) (3.20.3)
+Requirement already satisfied: dm-tree in ./daf/venv/lib/python3.10/site-packages (from dm-reverb==0.7.0->flybody==0.1.0) (0.1.9)
+Requirement already satisfied: portpicker in ./daf/venv/lib/python3.10/site-packages (from dm-reverb==0.7.0->flybody==0.1.0) (1.6.0)
+Requirement already satisfied: nvidia-cublas-cu11 in ./daf/venv/lib/python3.10/site-packages (from nvidia-cudnn-cu11==8.9.*->flybody==0.1.0) (11.11.3.6)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu11 in ./daf/venv/lib/python3.10/site-packages (from nvidia-cudnn-cu11==8.9.*->flybody==0.1.0) (11.8.89)
+Requirement already satisfied: absl-py>=0.4.0 in ./daf/venv/lib/python3.10/site-packages (from tensorflow==2.8.0->flybody==0.1.0) (2.2.2)
+Requirement already satisfied: astunparse>=1.6.0 in ./daf/venv/lib/python3.10/site-packages (from tensorflow==2.8.0->flybody==0.1.0) (1.6.3)
+Requirement already satisfied: flatbuffers>=1.12 in ./daf/venv/lib/python3.10/site-packages (from tensorflow==2.8.0->flybody==0.1.0) (25.2.10)
+Requirement already satisfied: gast>=0.2.1 in ./daf/venv/lib/python3.10/site-packages (from tensorflow==2.8.0->flybody==0.1.0) (0.6.0)
+Requirement already satisfied: google-pasta>=0.1.1 in ./daf/venv/lib/python3.10/site-packages (from tensorflow==2.8.0->flybody==0.1.0) (0.2.0)
+Requirement already satisfied: keras-preprocessing>=1.1.1 in ./daf/venv/lib/python3.10/site-packages (from tensorflow==2.8.0->flybody==0.1.0) (1.1.2)
+Requirement already satisfied: libclang>=9.0.1 in ./daf/venv/lib/python3.10/site-packages (from tensorflow==2.8.0->flybody==0.1.0) (18.1.1)
+Requirement already satisfied: opt-einsum>=2.3.2 in ./daf/venv/lib/python3.10/site-packages (from tensorflow==2.8.0->flybody==0.1.0) (3.4.0)
+Requirement already satisfied: setuptools in ./daf/venv/lib/python3.10/site-packages (from tensorflow==2.8.0->flybody==0.1.0) (59.6.0)
+Requirement already satisfied: six>=1.12.0 in ./daf/venv/lib/python3.10/site-packages (from tensorflow==2.8.0->flybody==0.1.0) (1.17.0)
+Requirement already satisfied: termcolor>=1.1.0 in ./daf/venv/lib/python3.10/site-packages (from tensorflow==2.8.0->flybody==0.1.0) (3.0.1)
+Requirement already satisfied: typing-extensions>=3.6.6 in ./daf/venv/lib/python3.10/site-packages (from tensorflow==2.8.0->flybody==0.1.0) (4.13.2)
+Requirement already satisfied: wrapt>=1.11.0 in ./daf/venv/lib/python3.10/site-packages (from tensorflow==2.8.0->flybody==0.1.0) (1.17.2)
+Requirement already satisfied: tensorboard<2.9,>=2.8 in ./daf/venv/lib/python3.10/site-packages (from tensorflow==2.8.0->flybody==0.1.0) (2.8.0)
+Requirement already satisfied: tf-estimator-nightly==2.8.0.dev2021122109 in ./daf/venv/lib/python3.10/site-packages (from tensorflow==2.8.0->flybody==0.1.0) (2.8.0.dev2021122109)
+Requirement already satisfied: keras<2.9,>=2.8.0rc0 in ./daf/venv/lib/python3.10/site-packages (from tensorflow==2.8.0->flybody==0.1.0) (2.8.0)
+Requirement already satisfied: tensorflow-io-gcs-filesystem>=0.23.1 in ./daf/venv/lib/python3.10/site-packages (from tensorflow==2.8.0->flybody==0.1.0) (0.37.1)
+Requirement already satisfied: grpcio<2.0,>=1.24.3 in ./daf/venv/lib/python3.10/site-packages (from tensorflow==2.8.0->flybody==0.1.0) (1.71.0)
+Requirement already satisfied: decorator in ./daf/venv/lib/python3.10/site-packages (from tensorflow-probability==0.16.0->flybody==0.1.0) (5.2.1)
+Requirement already satisfied: cloudpickle>=1.3 in ./daf/venv/lib/python3.10/site-packages (from tensorflow-probability==0.16.0->flybody==0.1.0) (3.1.1)
+Requirement already satisfied: dm_env in ./daf/venv/lib/python3.10/site-packages (from dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (1.6)
+Requirement already satisfied: pillow in ./daf/venv/lib/python3.10/site-packages (from dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (11.2.1)
+Requirement already satisfied: bsuite in ./daf/venv/lib/python3.10/site-packages (from dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (0.3.5)
+Requirement already satisfied: gym in ./daf/venv/lib/python3.10/site-packages (from dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (0.26.2)
+Requirement already satisfied: tensorflow_datasets in ./daf/venv/lib/python3.10/site-packages (from dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (4.9.8)
+Requirement already satisfied: dm-sonnet in ./daf/venv/lib/python3.10/site-packages (from dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (2.0.2)
+Requirement already satisfied: trfl in ./daf/venv/lib/python3.10/site-packages (from dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (1.2.0)
+Requirement already satisfied: tfp-nightly in ./daf/venv/lib/python3.10/site-packages (from dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (0.26.0.dev20250424)
+Requirement already satisfied: jax in ./daf/venv/lib/python3.10/site-packages (from dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (0.6.0)
+Requirement already satisfied: jaxlib in ./daf/venv/lib/python3.10/site-packages (from dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (0.6.0)
+Requirement already satisfied: dm-haiku in ./daf/venv/lib/python3.10/site-packages (from dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (0.0.14)
+Requirement already satisfied: optax in ./daf/venv/lib/python3.10/site-packages (from dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (0.2.4)
+Requirement already satisfied: rlax in ./daf/venv/lib/python3.10/site-packages (from dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (0.1.6)
+Requirement already satisfied: dataclasses in ./daf/venv/lib/python3.10/site-packages (from dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (0.6)
 Requirement already satisfied: glfw in ./daf/venv/lib/python3.10/site-packages (from dm_control->flybody==0.1.0) (2.9.0)
 Requirement already satisfied: labmaze in ./daf/venv/lib/python3.10/site-packages (from dm_control->flybody==0.1.0) (1.0.6)
 Requirement already satisfied: lxml in ./daf/venv/lib/python3.10/site-packages (from dm_control->flybody==0.1.0) (5.4.0)
 Requirement already satisfied: mujoco>=3.2.7 in ./daf/venv/lib/python3.10/site-packages (from dm_control->flybody==0.1.0) (3.3.1)
-Requirement already satisfied: protobuf>=3.19.4 in ./daf/venv/lib/python3.10/site-packages (from dm_control->flybody==0.1.0) (6.30.2)
 Requirement already satisfied: pyopengl>=3.1.4 in ./daf/venv/lib/python3.10/site-packages (from dm_control->flybody==0.1.0) (3.1.9)
 Requirement already satisfied: pyparsing>=3.0.0 in ./daf/venv/lib/python3.10/site-packages (from dm_control->flybody==0.1.0) (3.2.3)
 Requirement already satisfied: requests in ./daf/venv/lib/python3.10/site-packages (from dm_control->flybody==0.1.0) (2.32.3)
-Requirement already satisfied: setuptools!=50.0.0 in ./daf/venv/lib/python3.10/site-packages (from dm_control->flybody==0.1.0) (59.6.0)
 Requirement already satisfied: scipy in ./daf/venv/lib/python3.10/site-packages (from dm_control->flybody==0.1.0) (1.15.2)
 Requirement already satisfied: tqdm in ./daf/venv/lib/python3.10/site-packages (from dm_control->flybody==0.1.0) (4.67.1)
 Requirement already satisfied: ipython in ./daf/venv/lib/python3.10/site-packages (from mediapy->flybody==0.1.0) (8.35.0)
 Requirement already satisfied: matplotlib in ./daf/venv/lib/python3.10/site-packages (from mediapy->flybody==0.1.0) (3.10.1)
-Requirement already satisfied: Pillow in ./daf/venv/lib/python3.10/site-packages (from mediapy->flybody==0.1.0) (11.2.1)
 Requirement already satisfied: exceptiongroup>=1.0.0rc8 in ./daf/venv/lib/python3.10/site-packages (from pytest->flybody==0.1.0) (1.2.2)
 Requirement already satisfied: iniconfig in ./daf/venv/lib/python3.10/site-packages (from pytest->flybody==0.1.0) (2.1.0)
 Requirement already satisfied: packaging in ./daf/venv/lib/python3.10/site-packages (from pytest->flybody==0.1.0) (25.0)
 Requirement already satisfied: pluggy<2,>=1.5 in ./daf/venv/lib/python3.10/site-packages (from pytest->flybody==0.1.0) (1.5.0)
 Requirement already satisfied: tomli>=1 in ./daf/venv/lib/python3.10/site-packages (from pytest->flybody==0.1.0) (2.2.1)
-Requirement already satisfied: attrs>=18.2.0 in ./daf/venv/lib/python3.10/site-packages (from dm-tree!=0.1.2->dm_control->flybody==0.1.0) (25.3.0)
-Requirement already satisfied: wrapt>=1.11.2 in ./daf/venv/lib/python3.10/site-packages (from dm-tree!=0.1.2->dm_control->flybody==0.1.0) (1.17.2)
+Requirement already satisfied: wheel<1.0,>=0.23.0 in ./daf/venv/lib/python3.10/site-packages (from astunparse>=1.6.0->tensorflow==2.8.0->flybody==0.1.0) (0.45.1)
+Requirement already satisfied: attrs>=18.2.0 in ./daf/venv/lib/python3.10/site-packages (from dm-tree->dm-reverb==0.7.0->flybody==0.1.0) (25.3.0)
 Requirement already satisfied: etils[epath] in ./daf/venv/lib/python3.10/site-packages (from mujoco>=3.2.7->dm_control->flybody==0.1.0) (1.12.2)
-Requirement already satisfied: decorator in ./daf/venv/lib/python3.10/site-packages (from ipython->mediapy->flybody==0.1.0) (5.2.1)
+Requirement already satisfied: google-auth<3,>=1.6.3 in ./daf/venv/lib/python3.10/site-packages (from tensorboard<2.9,>=2.8->tensorflow==2.8.0->flybody==0.1.0) (2.39.0)
+Requirement already satisfied: google-auth-oauthlib<0.5,>=0.4.1 in ./daf/venv/lib/python3.10/site-packages (from tensorboard<2.9,>=2.8->tensorflow==2.8.0->flybody==0.1.0) (0.4.6)
+Requirement already satisfied: markdown>=2.6.8 in ./daf/venv/lib/python3.10/site-packages (from tensorboard<2.9,>=2.8->tensorflow==2.8.0->flybody==0.1.0) (3.8)
+Requirement already satisfied: tensorboard-data-server<0.7.0,>=0.6.0 in ./daf/venv/lib/python3.10/site-packages (from tensorboard<2.9,>=2.8->tensorflow==2.8.0->flybody==0.1.0) (0.6.1)
+Requirement already satisfied: tensorboard-plugin-wit>=1.6.0 in ./daf/venv/lib/python3.10/site-packages (from tensorboard<2.9,>=2.8->tensorflow==2.8.0->flybody==0.1.0) (1.8.1)
+Requirement already satisfied: werkzeug>=0.11.15 in ./daf/venv/lib/python3.10/site-packages (from tensorboard<2.9,>=2.8->tensorflow==2.8.0->flybody==0.1.0) (3.1.3)
+Requirement already satisfied: charset-normalizer<4,>=2 in ./daf/venv/lib/python3.10/site-packages (from requests->dm_control->flybody==0.1.0) (3.4.1)
+Requirement already satisfied: idna<4,>=2.5 in ./daf/venv/lib/python3.10/site-packages (from requests->dm_control->flybody==0.1.0) (3.10)
+Requirement already satisfied: urllib3<3,>=1.21.1 in ./daf/venv/lib/python3.10/site-packages (from requests->dm_control->flybody==0.1.0) (2.4.0)
+Requirement already satisfied: certifi>=2017.4.17 in ./daf/venv/lib/python3.10/site-packages (from requests->dm_control->flybody==0.1.0) (2025.1.31)
+Requirement already satisfied: frozendict in ./daf/venv/lib/python3.10/site-packages (from bsuite->dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (2.4.6)
+Requirement already satisfied: pandas in ./daf/venv/lib/python3.10/site-packages (from bsuite->dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (2.2.3)
+Requirement already satisfied: plotnine in ./daf/venv/lib/python3.10/site-packages (from bsuite->dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (0.14.5)
+Requirement already satisfied: scikit-image in ./daf/venv/lib/python3.10/site-packages (from bsuite->dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (0.25.2)
+Requirement already satisfied: jmp>=0.0.2 in ./daf/venv/lib/python3.10/site-packages (from dm-haiku->dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (0.0.4)
+Requirement already satisfied: tabulate>=0.8.9 in ./daf/venv/lib/python3.10/site-packages (from dm-haiku->dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (0.9.0)
+Requirement already satisfied: gym_notices>=0.0.4 in ./daf/venv/lib/python3.10/site-packages (from gym->dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (0.0.8)
+Requirement already satisfied: ale-py~=0.8.0 in ./daf/venv/lib/python3.10/site-packages (from gym[atari]; extra == "envs"->dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (0.8.1)
 Requirement already satisfied: jedi>=0.16 in ./daf/venv/lib/python3.10/site-packages (from ipython->mediapy->flybody==0.1.0) (0.19.2)
 Requirement already satisfied: matplotlib-inline in ./daf/venv/lib/python3.10/site-packages (from ipython->mediapy->flybody==0.1.0) (0.1.7)
 Requirement already satisfied: pexpect>4.3 in ./daf/venv/lib/python3.10/site-packages (from ipython->mediapy->flybody==0.1.0) (4.9.0)
@@ -84,31 +139,55 @@ Requirement already satisfied: prompt_toolkit<3.1.0,>=3.0.41 in ./daf/venv/lib/p
 Requirement already satisfied: pygments>=2.4.0 in ./daf/venv/lib/python3.10/site-packages (from ipython->mediapy->flybody==0.1.0) (2.19.1)
 Requirement already satisfied: stack_data in ./daf/venv/lib/python3.10/site-packages (from ipython->mediapy->flybody==0.1.0) (0.6.3)
 Requirement already satisfied: traitlets>=5.13.0 in ./daf/venv/lib/python3.10/site-packages (from ipython->mediapy->flybody==0.1.0) (5.14.3)
-Requirement already satisfied: typing_extensions>=4.6 in ./daf/venv/lib/python3.10/site-packages (from ipython->mediapy->flybody==0.1.0) (4.13.2)
+Requirement already satisfied: ml_dtypes>=0.5.0 in ./daf/venv/lib/python3.10/site-packages (from jax->dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (0.5.1)
 Requirement already satisfied: contourpy>=1.0.1 in ./daf/venv/lib/python3.10/site-packages (from matplotlib->mediapy->flybody==0.1.0) (1.3.2)
 Requirement already satisfied: cycler>=0.10 in ./daf/venv/lib/python3.10/site-packages (from matplotlib->mediapy->flybody==0.1.0) (0.12.1)
 Requirement already satisfied: fonttools>=4.22.0 in ./daf/venv/lib/python3.10/site-packages (from matplotlib->mediapy->flybody==0.1.0) (4.57.0)
 Requirement already satisfied: kiwisolver>=1.3.1 in ./daf/venv/lib/python3.10/site-packages (from matplotlib->mediapy->flybody==0.1.0) (1.4.8)
 Requirement already satisfied: python-dateutil>=2.7 in ./daf/venv/lib/python3.10/site-packages (from matplotlib->mediapy->flybody==0.1.0) (2.9.0.post0)
-Requirement already satisfied: charset-normalizer<4,>=2 in ./daf/venv/lib/python3.10/site-packages (from requests->dm_control->flybody==0.1.0) (3.4.1)
-Requirement already satisfied: idna<4,>=2.5 in ./daf/venv/lib/python3.10/site-packages (from requests->dm_control->flybody==0.1.0) (3.10)
-Requirement already satisfied: urllib3<3,>=1.21.1 in ./daf/venv/lib/python3.10/site-packages (from requests->dm_control->flybody==0.1.0) (2.4.0)
-Requirement already satisfied: certifi>=2017.4.17 in ./daf/venv/lib/python3.10/site-packages (from requests->dm_control->flybody==0.1.0) (2025.1.31)
+Requirement already satisfied: chex>=0.1.87 in ./daf/venv/lib/python3.10/site-packages (from optax->dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (0.1.89)
+Requirement already satisfied: psutil in ./daf/venv/lib/python3.10/site-packages (from portpicker->dm-reverb==0.7.0->flybody==0.1.0) (7.0.0)
+Requirement already satisfied: distrax>=0.0.2 in ./daf/venv/lib/python3.10/site-packages (from rlax->dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (0.1.5)
+Requirement already satisfied: array_record>=0.5.0 in ./daf/venv/lib/python3.10/site-packages (from tensorflow_datasets->dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (0.7.1)
+Requirement already satisfied: immutabledict in ./daf/venv/lib/python3.10/site-packages (from tensorflow_datasets->dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (4.2.1)
+Requirement already satisfied: promise in ./daf/venv/lib/python3.10/site-packages (from tensorflow_datasets->dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (2.3)
+Requirement already satisfied: pyarrow in ./daf/venv/lib/python3.10/site-packages (from tensorflow_datasets->dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (19.0.1)
+Requirement already satisfied: simple_parsing in ./daf/venv/lib/python3.10/site-packages (from tensorflow_datasets->dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (0.1.7)
+Requirement already satisfied: tensorflow-metadata in ./daf/venv/lib/python3.10/site-packages (from tensorflow_datasets->dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (1.16.1)
+Requirement already satisfied: toml in ./daf/venv/lib/python3.10/site-packages (from tensorflow_datasets->dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (0.10.2)
+Requirement already satisfied: importlib-resources in ./daf/venv/lib/python3.10/site-packages (from ale-py~=0.8.0->gym[atari]; extra == "envs"->dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (6.5.2)
+Requirement already satisfied: toolz>=0.9.0 in ./daf/venv/lib/python3.10/site-packages (from chex>=0.1.87->optax->dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (1.0.0)
+Requirement already satisfied: einops in ./daf/venv/lib/python3.10/site-packages (from etils[edc,enp,epath,epy,etree]>=1.6.0; python_version < "3.11"->tensorflow_datasets->dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (0.8.1)
+Requirement already satisfied: fsspec in ./daf/venv/lib/python3.10/site-packages (from etils[edc,enp,epath,epy,etree]>=1.6.0; python_version < "3.11"->tensorflow_datasets->dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (2025.3.2)
+Requirement already satisfied: zipp in ./daf/venv/lib/python3.10/site-packages (from etils[edc,enp,epath,epy,etree]>=1.6.0; python_version < "3.11"->tensorflow_datasets->dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (3.21.0)
+Requirement already satisfied: cachetools<6.0,>=2.0.0 in ./daf/venv/lib/python3.10/site-packages (from google-auth<3,>=1.6.3->tensorboard<2.9,>=2.8->tensorflow==2.8.0->flybody==0.1.0) (5.5.2)
+Requirement already satisfied: pyasn1-modules>=0.2.1 in ./daf/venv/lib/python3.10/site-packages (from google-auth<3,>=1.6.3->tensorboard<2.9,>=2.8->tensorflow==2.8.0->flybody==0.1.0) (0.4.2)
+Requirement already satisfied: rsa<5,>=3.1.4 in ./daf/venv/lib/python3.10/site-packages (from google-auth<3,>=1.6.3->tensorboard<2.9,>=2.8->tensorflow==2.8.0->flybody==0.1.0) (4.9.1)
+Requirement already satisfied: requests-oauthlib>=0.7.0 in ./daf/venv/lib/python3.10/site-packages (from google-auth-oauthlib<0.5,>=0.4.1->tensorboard<2.9,>=2.8->tensorflow==2.8.0->flybody==0.1.0) (2.0.0)
 Requirement already satisfied: parso<0.9.0,>=0.8.4 in ./daf/venv/lib/python3.10/site-packages (from jedi>=0.16->ipython->mediapy->flybody==0.1.0) (0.8.4)
 Requirement already satisfied: ptyprocess>=0.5 in ./daf/venv/lib/python3.10/site-packages (from pexpect>4.3->ipython->mediapy->flybody==0.1.0) (0.7.0)
 Requirement already satisfied: wcwidth in ./daf/venv/lib/python3.10/site-packages (from prompt_toolkit<3.1.0,>=3.0.41->ipython->mediapy->flybody==0.1.0) (0.2.13)
-Requirement already satisfied: six>=1.5 in ./daf/venv/lib/python3.10/site-packages (from python-dateutil>=2.7->matplotlib->mediapy->flybody==0.1.0) (1.17.0)
-Requirement already satisfied: fsspec in ./daf/venv/lib/python3.10/site-packages (from etils[epath]->mujoco>=3.2.7->dm_control->flybody==0.1.0) (2025.3.2)
-Requirement already satisfied: importlib_resources in ./daf/venv/lib/python3.10/site-packages (from etils[epath]->mujoco>=3.2.7->dm_control->flybody==0.1.0) (6.5.2)
-Requirement already satisfied: zipp in ./daf/venv/lib/python3.10/site-packages (from etils[epath]->mujoco>=3.2.7->dm_control->flybody==0.1.0) (3.21.0)
+Requirement already satisfied: MarkupSafe>=2.1.1 in ./daf/venv/lib/python3.10/site-packages (from werkzeug>=0.11.15->tensorboard<2.9,>=2.8->tensorflow==2.8.0->flybody==0.1.0) (3.0.2)
+Requirement already satisfied: pytz>=2020.1 in ./daf/venv/lib/python3.10/site-packages (from pandas->bsuite->dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (2025.2)
+Requirement already satisfied: tzdata>=2022.7 in ./daf/venv/lib/python3.10/site-packages (from pandas->bsuite->dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (2025.2)
+Requirement already satisfied: mizani~=0.13.0 in ./daf/venv/lib/python3.10/site-packages (from plotnine->bsuite->dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (0.13.3)
+Requirement already satisfied: statsmodels>=0.14.0 in ./daf/venv/lib/python3.10/site-packages (from plotnine->bsuite->dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (0.14.4)
+Requirement already satisfied: networkx>=3.0 in ./daf/venv/lib/python3.10/site-packages (from scikit-image->bsuite->dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (3.4.2)
+Requirement already satisfied: imageio!=2.35.0,>=2.33 in ./daf/venv/lib/python3.10/site-packages (from scikit-image->bsuite->dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (2.37.0)
+Requirement already satisfied: tifffile>=2022.8.12 in ./daf/venv/lib/python3.10/site-packages (from scikit-image->bsuite->dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (2025.3.30)
+Requirement already satisfied: lazy-loader>=0.4 in ./daf/venv/lib/python3.10/site-packages (from scikit-image->bsuite->dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (0.4)
+Requirement already satisfied: docstring-parser<1.0,>=0.15 in ./daf/venv/lib/python3.10/site-packages (from simple_parsing->tensorflow_datasets->dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (0.16)
 Requirement already satisfied: executing>=1.2.0 in ./daf/venv/lib/python3.10/site-packages (from stack_data->ipython->mediapy->flybody==0.1.0) (2.2.0)
 Requirement already satisfied: asttokens>=2.1.0 in ./daf/venv/lib/python3.10/site-packages (from stack_data->ipython->mediapy->flybody==0.1.0) (3.0.0)
 Requirement already satisfied: pure-eval in ./daf/venv/lib/python3.10/site-packages (from stack_data->ipython->mediapy->flybody==0.1.0) (0.2.3)
+Requirement already satisfied: pyasn1<0.7.0,>=0.6.1 in ./daf/venv/lib/python3.10/site-packages (from pyasn1-modules>=0.2.1->google-auth<3,>=1.6.3->tensorboard<2.9,>=2.8->tensorflow==2.8.0->flybody==0.1.0) (0.6.1)
+Requirement already satisfied: oauthlib>=3.0.0 in ./daf/venv/lib/python3.10/site-packages (from requests-oauthlib>=0.7.0->google-auth-oauthlib<0.5,>=0.4.1->tensorboard<2.9,>=2.8->tensorflow==2.8.0->flybody==0.1.0) (3.2.2)
+Requirement already satisfied: patsy>=0.5.6 in ./daf/venv/lib/python3.10/site-packages (from statsmodels>=0.14.0->plotnine->bsuite->dm-acme[envs,jax,tf]; extra == "tf"->flybody==0.1.0) (1.0.1)
 Building wheels for collected packages: flybody
   Building editable for flybody (pyproject.toml): started
   Building editable for flybody (pyproject.toml): finished with status 'done'
-  Created wheel for flybody: filename=flybody-0.1.0-0.editable-py3-none-any.whl size=13766 sha256=ce2ce8ebe2861d99f1c60c67cc4f97d05c0ca8d08ddbd4363d5e5df75fb2128b
-  Stored in directory: /tmp/pip-ephem-wheel-cache-wzkvi99q/wheels/a3/e3/b1/a6f3d503b4484a611bc01ddc418037dbcaf287d96b55f369af
+  Created wheel for flybody: filename=flybody-0.1.0-0.editable-py3-none-any.whl size=13766 sha256=44035eba4ff236d5011a8a49c22be68fc39cd1a679c193de87e42f8b1065f0af
+  Stored in directory: /tmp/pip-ephem-wheel-cache-hm4jgoyd/wheels/a3/e3/b1/a6f3d503b4484a611bc01ddc418037dbcaf287d96b55f369af
 Successfully built flybody
 Installing collected packages: flybody
   Attempting uninstall: flybody
@@ -116,7 +195,7 @@ Installing collected packages: flybody
     Uninstalling flybody-0.1.0:
       Successfully uninstalled flybody-0.1.0
 Successfully installed flybody-0.1.0
-flybody installation (Mode: core) complete.
+flybody installation (Mode: tf) complete.
 Installing additional packages for examples and visualizations...
 Requirement already satisfied: mediapy in ./daf/venv/lib/python3.10/site-packages (1.2.3)
 Requirement already satisfied: pytest in ./daf/venv/lib/python3.10/site-packages (8.3.5)
@@ -152,11 +231,11 @@ Requirement already satisfied: executing>=1.2.0 in ./daf/venv/lib/python3.10/sit
 Requirement already satisfied: asttokens>=2.1.0 in ./daf/venv/lib/python3.10/site-packages (from stack_data->ipython->mediapy) (3.0.0)
 Requirement already satisfied: pure-eval in ./daf/venv/lib/python3.10/site-packages (from stack_data->ipython->mediapy) (0.2.3)
 Installed packages:
-flybody             0.1.0       /home/trim/Documents/GitHub/flybody
-matplotlib          3.10.1
-matplotlib-inline   0.1.7
-mediapy             1.2.3
-pytest              8.3.5
+flybody                      0.1.0               /home/trim/Documents/GitHub/flybody
+matplotlib                   3.10.1
+matplotlib-inline            0.1.7
+mediapy                      1.2.3
+pytest                       8.3.5
 
 ========================================
 ========================================
@@ -172,6 +251,9 @@ The following environment variables might be needed for specific functionalities
    # export MUJOCO_GL=egl
    # export MUJOCO_EGL_DEVICE_ID=0  # Adjust '0' based on your GPU ID
 
+2. Shared Libraries (for TF/ML/Ray extensions):
+   If using the '[tf]' or '[ray]' extras, ensure CUDA/CuDNN libraries are findable.
+   You might need to set LD_LIBRARY_PATH to include your CUDA and CuDNN libraries.
 
 ========================================
 ========================================
@@ -206,7 +288,7 @@ tests/test_flywalker.py::test_set_name PASSED                            [ 88%]
 tests/test_walking_env.py::test_can_create_env_inference_mode PASSED     [ 94%]
 tests/test_walking_env.py::test_can_step_env_inference_mode PASSED       [100%]
 
-======================== 18 passed in 301.69s (0:05:01) ========================
+======================== 18 passed in 221.66s (0:03:41) ========================
 Test results saved to /home/trim/Documents/GitHub/flybody/daf/output/logs/pytest_output.txt
 
 ========================================

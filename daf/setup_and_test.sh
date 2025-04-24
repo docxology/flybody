@@ -12,7 +12,7 @@ PYTHON_VERSION="3.10"
 # 'core': Minimal installation for model interaction.
 # 'tf': Includes TensorFlow and Acme for running ML policies.
 # 'ray': Includes Ray for distributed training.
-INSTALL_MODE="core"
+INSTALL_MODE="tf"
 
 # --- Path Setup ---
 # Detect if we're running from daf directory or from repo root

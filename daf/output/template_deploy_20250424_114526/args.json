@@ -1,0 +1,10 @@
+{
+  "task": "template",
+  "mode": "deploy",
+  "episodes": 100,
+  "max_steps": 10,
+  "checkpoint": null,
+  "output_name": null,
+  "save_frames": false,
+  "seed": 42
+}

@@ -24,4 +24,4 @@ tests/test_flywalker.py::test_set_name PASSED                            [ 88%]
 tests/test_walking_env.py::test_can_create_env_inference_mode PASSED     [ 94%]
 tests/test_walking_env.py::test_can_step_env_inference_mode PASSED       [100%]
 
-======================== 18 passed in 301.69s (0:05:01) ========================
+======================== 18 passed in 221.66s (0:03:41) ========================

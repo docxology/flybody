@@ -1,0 +1,1 @@
+"""Ant simulation main package.""" 

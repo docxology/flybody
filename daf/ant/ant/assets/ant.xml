@@ -1,0 +1,353 @@
+<mujoco model="ant">
+  <compiler autolimits="true" angle="radian"/>
+
+  <option timestep="0.0001" gravity="0 0 -981" density="0.00128" viscosity="0.000185" cone="elliptic" noslip_iterations="3"/>
+
+  <size njmax="300" nconmax="100" nkey="1"/>
+
+  <default>
+    <mesh scale="0.1 0.1 0.1"/>
+    <geom friction="0.5" solref="0.0002 1" solimp="0.95 0.99 0.01"/>
+    <general ctrllimited="true"/>
+    <default class="body">
+      <joint limited="true" solreflimit="0.001 1" armature="1e-06"/>
+      <geom type="mesh" contype="0" conaffinity="0" group="1" material="body" density="0.478"/>
+      <site group="3" size="0.01"/>
+      <default class="collision">
+        <geom type="capsule" contype="1" conaffinity="1" condim="1" group="4" material="blue" density="0"/>
+        <default class="adhesion-collision">
+          <geom material="pink" friction="0.6" margin="0.0005" gap="0.0005"/>
+          <site type="capsule"/>
+        </default>
+      </default>
+      <default class="adhesion">
+        <general dyntype="none" dynprm="1"/>
+        <default class="adhesion_claw">
+          <adhesion group="3" ctrlrange="0 1" gain="0.985"/>
+        </default>
+      </default>
+      <default class="head">
+        <joint stiffness="0.03" damping="0.001"/>
+        <geom density="0.713"/>
+        <general forcerange="-0.1 0.1" biastype="affine" gainprm="0.1" biasprm="0 -0.1"/>
+      </default>
+      <default class="antenna">
+        <joint damping="0.0003"/>
+        <general forcerange="-0.01 0.01" biastype="affine" gainprm="0.01" biasprm="0 -0.01"/>
+        <default class="antenna_extend">
+          <joint axis="1 0 0" range="-0.2 0.5"/>
+        </default>
+        <default class="antenna_twist">
+          <joint axis="0 1 0" range="-0.1 0.09"/>
+        </default>
+        <default class="antenna_abduct">
+          <joint axis="0 0 1" range="-0.4 0.8"/>
+        </default>
+      </default>
+      <default class="abdomen">
+        <joint group="3" stiffness="0.05" damping="0.01"/>
+        <geom density="0.555"/>
+        <general biastype="affine" gainprm="0.1" biasprm="0 -0.1"/>
+        <default class="abduct_abdomen">
+          <joint axis="0 0 1" range="-0.1 0.1"/>
+        </default>
+        <default class="extend_abdomen">
+          <joint axis="1 0 0" range="-0.15 0.1"/>
+        </default>
+      </default>
+      <default class="leg">
+        <joint stiffness="0.01" damping="0.01"/>
+        <geom density="1.18"/>
+        <default class="coxa">
+          <general biastype="affine" gainprm="0.8" biasprm="0 -0.8"/>
+          <default class="twist_coxa_C1">
+            <joint axis="0 1 0" range="-0.8 0.8"/>
+            <general ctrlrange="-0.8 0.8"/>
+          </default>
+          <default class="abduct_coxa_C1">
+            <joint axis="0 0 1" range="-1 0.7"/>
+            <general ctrlrange="-1 0.7"/>
+          </default>
+          <default class="extend_coxa_C1">
+            <joint axis="1 0 0" range="-0.2 1.7" springref="0.0584"/>
+            <general ctrlrange="-0.2 1.7"/>
+          </default>
+          <default class="twist_coxa_C2">
+            <joint axis="0 1 0" range="-0.75 0.8" springref="-0.742"/>
+            <general ctrlrange="-0.75 0.8"/>
+          </default>
+          <default class="abduct_coxa_C2">
+            <joint axis="0 0 1" range="-0.5 0.3" springref="-0.292"/>
+            <general ctrlrange="-0.5 0.3"/>
+          </default>
+          <default class="extend_coxa_C2">
+            <joint axis="1 0 0" range="-0.2 0.9" springref="0.408"/>
+            <general ctrlrange="-0.2 0.9"/>
+          </default>
+          <default class="twist_coxa_C3">
+            <joint axis="0 1 0" range="-0.15 0.8" springref="0.00841"/>
+            <general ctrlrange="-0.15 0.8"/>
+          </default>
+          <default class="abduct_coxa_C3">
+            <joint axis="0 0 1" range="-0.9 0.25"/>
+            <general ctrlrange="-0.9 0.25"/>
+          </default>
+          <default class="extend_coxa_C3">
+            <joint axis="1 0 0" range="-0.3 1.3" springref="0.158"/>
+            <general ctrlrange="-0.3 1.3"/>
+          </default>
+        </default>
+        <default class="femur">
+          <general biastype="affine" gainprm="0.8" biasprm="0 -0.8"/>
+          <default class="twist_femur">
+            <joint axis="0 1 0" range="-1 1"/>
+            <general ctrlrange="-1 1"/>
+            <default class="twist_femur_C2">
+              <joint springref="0.608"/>
+            </default>
+            <default class="twist_femur_C3">
+              <joint springref="0.558"/>
+            </default>
+          </default>
+          <default class="extend_femur">
+            <joint axis="1 0 0" range="-0.15 2"/>
+            <general ctrlrange="-0.15 2"/>
+            <default class="extend_femur_C1">
+              <joint springref="-0.142"/>
+            </default>
+            <default class="extend_femur_C2">
+              <joint springref="0.208"/>
+            </default>
+          </default>
+          <default class="extend_femur_C3">
+            <joint axis="1 0 0" range="-0.7 1.5" springref="0.258"/>
+            <general ctrlrange="-0.7 1.5"/>
+          </default>
+        </default>
+        <default class="tibia">
+          <joint damping="0.004"/>
+          <general biastype="affine" gainprm="0.4" biasprm="0 -0.4"/>
+          <default class="extend_tibia">
+            <joint axis="1 0 0" range="-1.35 1.3" springref="-1.29"/>
+            <general ctrlrange="-1.35 1.3"/>
+            <default class="extend_tibia_C2">
+              <joint springref="-1.34"/>
+            </default>
+            <default class="extend_tibia_C3">
+              <joint springref="-0.292"/>
+            </default>
+          </default>
+        </default>
+        <default class="tarsus">
+          <joint axis="1 0 0"/>
+          <general biastype="affine" gainprm="0.4" biasprm="0 -0.4"/>
+          <default class="extend_tarsus_C1">
+            <joint range="-0.7 1.2" springref="-0.242"/>
+            <general ctrlrange="-0.7 1.2"/>
+          </default>
+          <default class="extend_tarsus_C2">
+            <joint range="-1 1.8" springref="0.608"/>
+            <general ctrlrange="-1 1.8"/>
+          </default>
+          <default class="extend_tarsus_C3">
+            <joint range="-0.8 1.2" springref="0.258"/>
+            <general ctrlrange="-0.8 1.2"/>
+          </default>
+          <default class="extend_tarsus">
+            <joint group="3" stiffness="0.1" range="-0.36 0.36" damping="0.002"/>
+            <general ctrlrange="-0.36 0.36"/>
+          </default>
+        </default>
+      </default>
+    </default>
+  </default>
+
+  <visual>
+    <global offwidth="3840" offheight="2160"/>
+    <quality shadowsize="4096"/>
+    <map force="0.1" fogend="5"/>
+    <scale forcewidth="0.01" contactwidth="0.05" contactheight="0.05"/>
+    <rgba haze="0.15 0.25 0.35 1" force="0.7 0.2 0.7 1"/>
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="512"/>
+    <texture name="groundplane" type="2d" builtin="checker" rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3" width="512" height="512" mark="edge" markrgb="0.8 0.8 0.8"/>
+    <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="10 10" reflectance="0.2"/>
+    <material name="body" rgba="0.4 0.2 0.0 1"/>
+    <material name="blue" rgba="0.3 0.5 0.7 0.3"/>
+    <material name="pink" rgba="0.9 0.2 0.5 0.3"/>
+    <material name="pink_highlight" rgba="0.9 0.2 0.5 0.5"/>
+    <material name="brown" rgba="0.4 0.2 0.0 1"/>
+    <material name="red" rgba="0.9 0.1 0.1 1"/>
+    <material name="black" rgba="0.1 0.1 0.1 1"/>
+  </asset>
+
+  <worldbody>
+    <light name="spotlight" mode="targetbodycom" target="thorax" pos="0 -1 1" dir="0 -1 -2" cutoff="15"/>
+    <light name="spotlight2" mode="targetbodycom" target="thorax" pos="0 -1 1" dir="0 -1 -2" cutoff="15"/>
+    <light name="light" pos="0 0 1" dir="0 0 -1" diffuse="0.4 0.4 0.4" mode="fixed"/>
+    <camera name="side" pos="0.22 -0.2 0.15" xyaxes="0 1 0 0 0 1" fovy="45"/>
+    <camera name="back" pos="0.2 0 0.15" xyaxes="-1 0 0 0 0 1" fovy="45"/>
+    <camera name="top_near" pos="0 0 0.18" xyaxes="1 0 0 0 1 0" fovy="45"/>
+    <camera name="top_far" pos="0 0 0.5" xyaxes="1 0 0 0 1 0" fovy="45"/>
+    <camera name="tracking_side" pos="0 -0.3 0.15" xyaxes="0 1 0 0 0 1" fovy="45" mode="targetbody" target="thorax"/>
+    <camera name="tracking_back" pos="-0.3 0 0.15" xyaxes="1 0 0 0 0 1" fovy="45" mode="targetbody" target="thorax"/>
+    <camera name="tracking_top" pos="0 0 0.3" xyaxes="1 0 0 0 1 0" fovy="45" mode="targetbody" target="thorax"/>
+
+    <!-- NOTE: This is a placeholder. In a real implementation, the ant's body parts would be defined here. -->
+    <body name="thorax" pos="0 0 0.1">
+      <freejoint name="root"/>
+      
+      <camera name="eye_right" pos="0.01 -0.005 0.015" euler="90 0 -20" fovy="150"/>
+      <camera name="eye_left" pos="0.01 0.005 0.015" euler="90 0 20" fovy="150"/>
+
+      <geom name="thorax" type="sphere" size="0.02" material="body"/>
+      <site name="thorax" pos="0 0 0" size="0.005"/>
+
+      <!-- Sensors in the thorax -->
+      <site name="accelerometer" pos="0 0 0"/>
+      <site name="gyro" pos="0 0 0"/>
+      <site name="velocimeter" pos="0 0 0"/>
+
+      <!-- Head -->
+      <body name="head" pos="0.02 0 0">
+        <joint name="head_pitch" class="head" axis="0 1 0" range="-0.5 0.5"/>
+        <joint name="head_yaw" class="head" axis="0 0 1" range="-0.5 0.5"/>
+        <geom name="head" type="sphere" size="0.01" material="body"/>
+        <site name="head" pos="0 0 0" size="0.005"/>
+
+        <!-- Antennae -->
+        <body name="antenna_base_left" pos="0.005 0.005 0.005">
+          <joint name="antenna_left_abduct" class="antenna_abduct"/>
+          <geom name="antenna_left" type="capsule" size="0.001" fromto="0 0 0 0.01 0.005 0.01" material="body"/>
+          <site name="antenna_left" pos="0.01 0.005 0.01" size="0.002"/>
+        </body>
+
+        <body name="antenna_base_right" pos="0.005 -0.005 0.005">
+          <joint name="antenna_right_abduct" class="antenna_abduct"/>
+          <geom name="antenna_right" type="capsule" size="0.001" fromto="0 0 0 0.01 -0.005 0.01" material="body"/>
+          <site name="antenna_right" pos="0.01 -0.005 0.01" size="0.002"/>
+        </body>
+
+        <!-- Mandibles -->
+        <body name="mandible" pos="0.01 0 0">
+          <joint name="mandible_open" axis="0 1 0" range="0 0.2"/>
+          <geom name="mandible_left" type="capsule" size="0.001" fromto="0 0 0 0.005 0.003 0" material="black"/>
+          <geom name="mandible_right" type="capsule" size="0.001" fromto="0 0 0 0.005 -0.003 0" material="black"/>
+        </body>
+      </body>
+
+      <!-- Abdomen (gaster) -->
+      <body name="abdomen" pos="-0.03 0 0">
+        <joint name="abdomen_pitch" class="extend_abdomen"/>
+        <joint name="abdomen_yaw" class="abduct_abdomen"/>
+        <geom name="abdomen" type="ellipsoid" size="0.025 0.015 0.015" material="body"/>
+        <site name="abdomen" pos="0 0 0" size="0.005"/>
+      </body>
+
+      <!-- Legs - only defining one leg as an example, would need to define all 6 legs -->
+      <body name="coxa_C1_right" pos="0.01 -0.01 0">
+        <joint name="twist_coxa_C1_right" class="twist_coxa_C1"/>
+        <joint name="abduct_coxa_C1_right" class="abduct_coxa_C1"/>
+        <joint name="extend_coxa_C1_right" class="extend_coxa_C1"/>
+        <geom name="coxa_C1_right" type="capsule" size="0.001" fromto="0 0 0 0.01 -0.01 0" material="body"/>
+        <site name="coxa_C1_right" pos="0.01 -0.01 0" size="0.002"/>
+
+        <body name="femur_C1_right" pos="0.01 -0.01 0">
+          <joint name="twist_femur_C1_right" class="twist_femur"/>
+          <joint name="extend_femur_C1_right" class="extend_femur_C1"/>
+          <geom name="femur_C1_right" type="capsule" size="0.001" fromto="0 0 0 0.02 -0.02 0" material="body"/>
+          <site name="femur_C1_right" pos="0.02 -0.02 0" size="0.002"/>
+
+          <body name="tibia_C1_right" pos="0.02 -0.02 0">
+            <joint name="extend_tibia_C1_right" class="extend_tibia"/>
+            <geom name="tibia_C1_right" type="capsule" size="0.001" fromto="0 0 0 0.02 -0.02 -0.01" material="body"/>
+            <site name="tibia_C1_right" pos="0.02 -0.02 -0.01" size="0.002"/>
+
+            <body name="tarsus_C1_right" pos="0.02 -0.02 -0.01">
+              <joint name="extend_tarsus_C1_right" class="extend_tarsus_C1"/>
+              <geom name="tarsus_C1_right" type="capsule" size="0.0005" fromto="0 0 0 0.01 -0.01 -0.005" material="body"/>
+              <site name="tarsus_C1_right" pos="0.01 -0.01 -0.005" size="0.002"/>
+              
+              <geom name="tarsal_claw_C1_right" type="capsule" class="adhesion-collision" size="0.0005" pos="0.01 -0.01 -0.005" zaxis="0 0 -1" fromto="0 0 0 0.001 0 0" friction="0.9 0.005 0.0001"/>
+              <site name="tarsal_claw_C1_right" type="capsule" size="0.0005" pos="0.01 -0.01 -0.005" zaxis="0 0 -1" fromto="0 0 0 0.001 0 0"/>
+            </body>
+          </body>
+        </body>
+      </body>
+
+      <!-- More legs would be defined here, following a similar pattern -->
+
+    </body>
+  </worldbody>
+
+  <actuator>
+    <general name="head_pitch" joint="head_pitch" class="head"/>
+    <general name="head_yaw" joint="head_yaw" class="head"/>
+    <general name="antenna_left_abduct" joint="antenna_left_abduct" class="antenna"/>
+    <general name="antenna_right_abduct" joint="antenna_right_abduct" class="antenna"/>
+    <general name="mandible_open" joint="mandible_open" forcerange="-0.05 0.05" ctrlrange="-0.2 0.2"/>
+    <general name="abdomen_pitch" joint="abdomen_pitch" class="abdomen"/>
+    <general name="abdomen_yaw" joint="abdomen_yaw" class="abdomen"/>
+    
+    <!-- Leg actuators for the right front leg -->
+    <general name="twist_coxa_C1_right" joint="twist_coxa_C1_right" class="coxa"/>
+    <general name="abduct_coxa_C1_right" joint="abduct_coxa_C1_right" class="coxa"/>
+    <general name="extend_coxa_C1_right" joint="extend_coxa_C1_right" class="coxa"/>
+    <general name="twist_femur_C1_right" joint="twist_femur_C1_right" class="femur"/>
+    <general name="extend_femur_C1_right" joint="extend_femur_C1_right" class="femur"/>
+    <general name="extend_tibia_C1_right" joint="extend_tibia_C1_right" class="tibia"/>
+    <general name="extend_tarsus_C1_right" joint="extend_tarsus_C1_right" class="tarsus"/>
+    
+    <!-- Adhesion actuators -->
+    <adhesion name="adhere_claw_C1_right" body="tarsus_C1_right" ctrlrange="0 1" gain="1"/>
+    
+    <!-- More actuators would be defined for other legs -->
+  </actuator>
+
+  <sensor>
+    <touch name="touch_thorax" site="thorax"/>
+    <touch name="touch_abdomen" site="abdomen"/>
+    
+    <!-- Leg contact sensors -->
+    <touch name="touch_tarsus_C1_right" site="tarsus_C1_right"/>
+    
+    <!-- Joint position and velocity sensors -->
+    <jointpos name="jointpos_head_pitch" joint="head_pitch"/>
+    <jointpos name="jointpos_head_yaw" joint="head_yaw"/>
+    <jointpos name="jointpos_abdomen_pitch" joint="abdomen_pitch"/>
+    <jointpos name="jointpos_abdomen_yaw" joint="abdomen_yaw"/>
+    
+    <!-- Front right leg joint position sensors -->
+    <jointpos name="jointpos_twist_coxa_C1_right" joint="twist_coxa_C1_right"/>
+    <jointpos name="jointpos_abduct_coxa_C1_right" joint="abduct_coxa_C1_right"/>
+    <jointpos name="jointpos_extend_coxa_C1_right" joint="extend_coxa_C1_right"/>
+    <jointpos name="jointpos_twist_femur_C1_right" joint="twist_femur_C1_right"/>
+    <jointpos name="jointpos_extend_femur_C1_right" joint="extend_femur_C1_right"/>
+    <jointpos name="jointpos_extend_tibia_C1_right" joint="extend_tibia_C1_right"/>
+    <jointpos name="jointpos_extend_tarsus_C1_right" joint="extend_tarsus_C1_right"/>
+    
+    <!-- Joint velocity sensors -->
+    <jointvel name="jointvel_head_pitch" joint="head_pitch"/>
+    <jointvel name="jointvel_head_yaw" joint="head_yaw"/>
+    <jointvel name="jointvel_abdomen_pitch" joint="abdomen_pitch"/>
+    <jointvel name="jointvel_abdomen_yaw" joint="abdomen_yaw"/>
+    
+    <!-- Front right leg joint velocity sensors -->
+    <jointvel name="jointvel_twist_coxa_C1_right" joint="twist_coxa_C1_right"/>
+    <jointvel name="jointvel_abduct_coxa_C1_right" joint="abduct_coxa_C1_right"/>
+    <jointvel name="jointvel_extend_coxa_C1_right" joint="extend_coxa_C1_right"/>
+    <jointvel name="jointvel_twist_femur_C1_right" joint="twist_femur_C1_right"/>
+    <jointvel name="jointvel_extend_femur_C1_right" joint="extend_femur_C1_right"/>
+    <jointvel name="jointvel_extend_tibia_C1_right" joint="extend_tibia_C1_right"/>
+    <jointvel name="jointvel_extend_tarsus_C1_right" joint="extend_tarsus_C1_right"/>
+    
+    <!-- IMU sensors moved from thorax -->
+    <accelerometer name="accelerometer" site="accelerometer"/>
+    <gyro name="gyro" site="gyro"/>
+    <velocimeter name="velocimeter" site="velocimeter"/>
+    
+    <!-- More sensors would be defined here -->
+  </sensor>
+</mujoco> 
