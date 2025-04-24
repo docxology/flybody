@@ -4,6 +4,8 @@ import mediapy
 import matplotlib.pyplot as plt
 from pathlib import Path
 from matplotlib.gridspec import GridSpec
+import matplotlib
+matplotlib.use('Agg')  # Use non-interactive backend
 
 # Ensure output paths exist
 output_dir = Path('/home/trim/Documents/GitHub/flybody/daf/output')
@@ -32,14 +34,6 @@ try:
     
     # Take a few random actions in each environment
     print("Running simulations with random actions...")
-    # Action dimensions for each environment
-    action_dims = {
-        "walk_imitation": 59,
-        "flight_imitation": 36,
-        "walk_on_ball": 59,
-        "vision_guided_flight": 36,
-        "template_task": 59
-    }
     
     # Camera IDs that work well for each environment
     camera_ids = {
@@ -55,8 +49,18 @@ try:
     for env_name, env in envs.items():
         print(f"Running {env_name}...")
         frames = []
+        
+        # Get the correct action spec for this environment
+        action_spec = env.action_spec()
+        print(f"Action space for {env_name}: {action_spec.shape[0]} dimensions")
+        
         for i in range(10):  # Just 10 frames for the combined visualization
-            action = np.random.normal(size=action_dims[env_name])
+            # Generate random action with proper dimensions for this environment
+            action = np.random.uniform(
+                low=action_spec.minimum, 
+                high=action_spec.maximum, 
+                size=action_spec.shape
+            )
             timestep = env.step(action)
             pixels = env.physics.render(camera_id=camera_ids[env_name])
             frames.append(pixels)
@@ -68,14 +72,6 @@ try:
     num_envs = len(envs)
     rows = int(np.ceil(np.sqrt(num_envs)))
     cols = int(np.ceil(num_envs / rows))
-    
-    # Get the frame sizes (assume all frames for a given env have the same size)
-    frame_heights = {env_name: frames[0].shape[0] for env_name, frames in all_env_frames.items()}
-    frame_widths = {env_name: frames[0].shape[1] for env_name, frames in all_env_frames.items()}
-    
-    # Calculate the grid size based on the largest frame
-    max_height = max(frame_heights.values())
-    max_width = max(frame_widths.values())
     
     # Create the combined frames
     combined_frames = []
@@ -96,18 +92,18 @@ try:
         
         plt.tight_layout()
         
-        # Convert figure to image
-        fig.canvas.draw()
-        img = np.frombuffer(fig.canvas.tostring_rgb(), dtype=np.uint8)
-        img = img.reshape(fig.canvas.get_width_height()[::-1] + (3,))
-        
-        combined_frames.append(img)
-        
-        # Save frame as image
+        # Save frame as image directly in RGB format
         frame_path = images_dir / f"combined_frame_{frame_idx:03d}.png"
-        plt.savefig(frame_path, dpi=120)
+        plt.savefig(frame_path, dpi=120, format='png', transparent=False)
         print(f"Saved combined frame {frame_idx} to {frame_path}")
         
+        # Read the saved image and convert to RGB if needed
+        saved_img = mediapy.read_image(frame_path)
+        # Convert from RGBA to RGB if needed
+        if saved_img.shape[2] == 4:
+            saved_img = saved_img[:, :, :3]
+        
+        combined_frames.append(saved_img)
         plt.close(fig)
     
     # Save combined animation

@@ -19,13 +19,22 @@ try:
     print(f'Creating {EXAMPLE_NAME} environment...')
     env = flight_imitation()
     
-    
+    # Get the correct action size
+    action_spec = env.action_spec()
+    action_size = action_spec.shape[0]
+    print(f"Action space size: {action_size}")
     
     # Run simulation for a few steps with random actions
     print('Running simulation with random actions...')
     frames = []
     for i in range(20):
-        action = np.random.normal(size=36)
+        # Generate random action with proper dimensions
+        action = np.random.uniform(
+            low=action_spec.minimum, 
+            high=action_spec.maximum, 
+            size=action_spec.shape
+        )
+        
         timestep = env.step(action)
         
         # Render and save current frame

@@ -5,3 +5,6 @@ __pycache__/
 
 *.egg-info
 
+*/venv/
+*/.venv/
+/daf/venv
