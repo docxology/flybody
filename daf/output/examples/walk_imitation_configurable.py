@@ -54,16 +54,25 @@ try:
         print('Creating multi-view animation...')
         multi_frames = []
         
-        # Store the current physics state to restore later
-        physics_state = env.physics.get_state()
-        
         # Calculate indices for multiview frames, limited by total number of frames
         max_frames = min(NUM_MULTIVIEW_FRAMES, len(frames))
         multiview_indices = list(range(0, NUM_SIMULATION_STEPS, MULTIVIEW_INTERVAL))[:max_frames]
         
-        for i in multiview_indices:
-            # Set the physics state to the frame we want to render
-            if i < len(frames):
+        # Reset environment to initial state
+        env.reset()
+        
+        # Re-run the simulation to capture multiview frames
+        print(f'Re-running simulation for {len(multiview_indices)} multiview frames...')
+        for index, step in enumerate(range(NUM_SIMULATION_STEPS)):
+            # Use same random action sequence as before to ensure consistency
+            np.random.seed(step)  # Set seed based on step number for reproducibility
+            action = np.random.normal(size=59)
+            timestep = env.step(action)
+            
+            # Only process frames at specified intervals
+            if step in multiview_indices:
+                print(f'Capturing multiview for step {step}...')
+                
                 # Get images from different camera angles
                 views = []
                 for cam_id in range(4):  # Try cameras 0-3
@@ -87,12 +96,9 @@ try:
                     multi_frames.append(grid)
                     
                     # Save grid as image
-                    grid_path = images_dir / f'{EXAMPLE_NAME}_multiview_{i:03d}.png'
+                    grid_path = images_dir / f'{EXAMPLE_NAME}_multiview_{step:03d}.png'
                     mediapy.write_image(grid_path, grid)
-                    print(f'Saved multiview frame {i} to {grid_path}')
-        
-        # Restore the physics state
-        env.physics.set_state(physics_state)
+                    print(f'Saved multiview frame {step} to {grid_path}')
         
         if multi_frames:
             # Save multi-view animation - ensure we have enough frames
