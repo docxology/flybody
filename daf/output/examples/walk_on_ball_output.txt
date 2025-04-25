@@ -1,0 +1,47 @@
+Creating walk_on_ball environment...
+Running simulation with random actions...
+Saved frame 0 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_000.png
+Saved frame 1 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_001.png
+Saved frame 2 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_002.png
+Saved frame 3 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_003.png
+Saved frame 4 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_004.png
+Saved frame 5 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_005.png
+Saved frame 6 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_006.png
+Saved frame 7 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_007.png
+Saved frame 8 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_008.png
+Saved frame 9 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_009.png
+Saved frame 10 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_010.png
+Saved frame 11 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_011.png
+Saved frame 12 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_012.png
+Saved frame 13 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_013.png
+Saved frame 14 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_014.png
+Saved frame 15 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_015.png
+Saved frame 16 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_016.png
+Saved frame 17 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_017.png
+Saved frame 18 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_018.png
+Saved frame 19 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_019.png
+Saved frame 20 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_020.png
+Saved frame 21 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_021.png
+Saved frame 22 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_022.png
+Saved frame 23 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_023.png
+Saved frame 24 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_024.png
+Saved frame 25 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_025.png
+Saved frame 26 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_026.png
+Saved frame 27 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_027.png
+Saved frame 28 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_028.png
+Saved frame 29 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_029.png
+Saved frame 30 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_030.png
+Saved frame 31 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_031.png
+Saved frame 32 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_032.png
+Saved frame 33 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_033.png
+Saved frame 34 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_034.png
+Saved frame 35 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_035.png
+Saved frame 36 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_036.png
+Saved frame 37 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_037.png
+Saved frame 38 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_038.png
+Saved frame 39 to /home/trim/Documents/GitHub/flybody/daf/output/images/walk_on_ball_frame_039.png
+Saving animation...
+Saved animation to /home/trim/Documents/GitHub/flybody/daf/output/animations/walk_on_ball.mp4
+Creating multi-view animation...
+Saved multi-view animation to /home/trim/Documents/GitHub/flybody/daf/output/animations/walk_on_ball_multiview.mp4
+Example completed successfully!
