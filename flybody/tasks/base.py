@@ -11,7 +11,7 @@ from dm_control.composer.observation import observable
 
 from flybody.quaternions import get_dquat_local
 from flybody.tasks.task_utils import make_ghost_fly
-from flybody.utils import any_substr_in_str
+from flybody.fruitfly.fruitfly import any_substr_in_str
 from flybody.tasks.constants import (_FLY_PHYSICS_TIMESTEP,
                                      _FLY_CONTROL_TIMESTEP, _BODY_PITCH_ANGLE,
                                      _WALK_PHYSICS_TIMESTEP,

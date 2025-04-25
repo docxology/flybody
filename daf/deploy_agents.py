@@ -15,17 +15,19 @@ import sonnet as snt
 from acme.tf import networks as acme_networks
 from acme import specs
 import dm_env
+from dm_control import mjcf
 
 # Add the parent directory to sys.path for imports
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Import flybody modules
-from flybody.tasks import template_task, walk_imitation, flight_imitation, walk_on_ball #, vision_flight <-- Still commented out
 from flybody.tasks import template_task, walk_imitation, flight_imitation, walk_on_ball, vision_flight
 from flybody.agents import agent_dmpo, actors, network_factory
+from flybody.fruitfly.fruitfly import FruitFly
+from dm_control.locomotion.arenas.floors import Floor
 
 # Import local utilities
-from daf_agent_utils import (
+from daf.daf_agent_utils import (
     create_run_dirs, 
     MetricLogger, 
     run_episode, 
@@ -38,8 +40,101 @@ TASKS = {
     'walk_imitation': walk_imitation.WalkImitation,
     'flight_imitation': flight_imitation.FlightImitationWBPG,
     'walk_on_ball': walk_on_ball.WalkOnBall,
-    # 'vision_flight': vision_flight.Vision, # Temporarily commented out
+    'vision_flight': vision_flight.VisionFlightImitationWBPG,
 }
+
+class TaskEnvironmentWrapper(dm_env.Environment):
+    """Wrapper that adapts a task to the dm_env.Environment interface."""
+    
+    def __init__(self, task):
+        self._task = task
+        self._physics = mjcf.Physics.from_mjcf_model(task.root_entity.mjcf_model)
+        self._reset_next_step = True
+        self._random_state = np.random.RandomState(42)  # Default seed
+        
+        # Determine shapes and dtypes from the first reset
+        physics = self._physics.copy()
+        task.initialize_episode(physics, self._random_state)
+        action = np.zeros(task.action_spec(physics).shape)
+        task.before_step(physics, action, self._random_state)
+        physics.step()
+        time_step = self._get_time_step(physics)
+        
+        self._observation_spec = specs.BoundedArray(
+            shape=time_step.observation.shape,
+            dtype=time_step.observation.dtype,
+            minimum=-np.inf,
+            maximum=np.inf,
+            name='observation'
+        )
+        
+        action_spec = task.action_spec(physics)
+        self._action_spec = specs.BoundedArray(
+            shape=action_spec.shape,
+            dtype=action_spec.dtype,
+            minimum=action_spec.minimum,
+            maximum=action_spec.maximum,
+            name='action'
+        )
+    
+    def reset(self):
+        """Reset the environment."""
+        physics = self._physics.copy()
+        self._task.initialize_episode(physics, self._random_state)
+        self._physics = physics
+        self._reset_next_step = False
+        return self._get_time_step(physics)
+    
+    def step(self, action):
+        """Take a step in the environment."""
+        if self._reset_next_step:
+            return self.reset()
+        
+        physics = self._physics.copy()
+        
+        # Apply action
+        self._task.before_step(physics, action, self._random_state)
+        physics.step()
+        
+        # Check if the episode should terminate
+        if self._task.should_terminate_episode(physics):
+            self._reset_next_step = True
+        
+        self._physics = physics
+        return self._get_time_step(physics)
+    
+    def _get_time_step(self, physics):
+        """Convert the current physics state to a TimeStep."""
+        discount = self._task.get_discount(physics)
+        reward = self._task.get_reward(physics)
+        
+        # Get observation
+        obs_dict = {}
+        for name, observable in self._task.walker.observables.items():
+            if observable.enabled:
+                obs_dict[name] = observable(physics)
+        
+        # Flatten the observation dict to a single array for simplicity
+        # In a more complete implementation, this would preserve the structure
+        obs_flat = np.concatenate([v.flatten() for v in obs_dict.values()])
+        
+        if self._reset_next_step:
+            return dm_env.termination(reward, obs_flat)
+        else:
+            return dm_env.transition(reward, discount, obs_flat)
+    
+    def observation_spec(self):
+        """Return the observation spec."""
+        return self._observation_spec
+    
+    def action_spec(self):
+        """Return the action spec."""
+        return self._action_spec
+    
+    @property
+    def physics(self):
+        """Return the underlying physics object."""
+        return self._physics
 
 def create_environment(task_name, **kwargs):
     """Create an environment for the specified task."""
@@ -47,10 +142,10 @@ def create_environment(task_name, **kwargs):
         raise ValueError(f"Unknown task: {task_name}. Available tasks: {list(TASKS.keys())}")
     
     # Default components for task initialization (can be overridden by kwargs)
-    default_walker = kwargs.pop('walker', fruitfly.FruitFly())
+    default_walker = kwargs.pop('walker', FruitFly)
     default_arena = kwargs.pop('arena', Floor())
     default_time_limit = kwargs.pop('time_limit', 10.0) # Default 10 seconds
-    default_joint_filter = kwargs.pop('joint_filter', ButterworthFilter())
+    default_joint_filter = kwargs.pop('joint_filter', 0.01) # Default filter value
     
     task_class = TASKS[task_name]
     
@@ -58,7 +153,7 @@ def create_environment(task_name, **kwargs):
     # (Need to inspect base classes or task signatures, difficult without file reading)
     # For now, assume most tasks take these standard args. Handle exceptions if they occur.
     try:
-        environment = task_class(
+        task = task_class(
             walker=default_walker, 
             arena=default_arena, 
             time_limit=default_time_limit,
@@ -70,11 +165,13 @@ def create_environment(task_name, **kwargs):
         print(f"Attempting initialization without standard args...")
         # Fallback for tasks that might not take these standard args
         try:
-            environment = task_class(**kwargs)
+            task = task_class(**kwargs)
         except Exception as final_e:
             print(f"Error: Failed to initialize task {task_name} even with fallback.")
             raise final_e
-            
+    
+    # Wrap the task in an environment adapter that provides the expected interface
+    environment = TaskEnvironmentWrapper(task)
     return environment
 
 def create_agent(env_spec, config=None):
