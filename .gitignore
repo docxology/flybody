@@ -5,4 +5,10 @@ __pycache__/
 
 *.egg-info
 
+<<<<<<< HEAD
 /daf/venv
+=======
+*/venv/
+*/.venv/
+daf/venv
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05

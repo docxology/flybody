@@ -366,6 +366,7 @@ class Ant(legacy_base.Walker):
                 if (hasattr(actuator, 'joint') and actuator.joint and
                         'adhere' not in actuator.name):
                     # Convert position-controlled actuator to force-controlled.
+<<<<<<< HEAD
                     # Set attributes to None instead of using remove
                     if hasattr(actuator, 'gainprm'):
                         actuator.gainprm = None
@@ -379,6 +380,13 @@ class Ant(legacy_base.Walker):
                         actuator.biastype = 'none'
                     except Exception as e:
                         print(f"Warning: Could not set attributes for {actuator.name}: {e}")
+=======
+                    actuator.remove('gainprm')
+                    actuator.remove('biasprm')
+                    actuator.remove('biastype')
+                    actuator.gainprm = 1
+                    actuator.biastype = 'none'
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
 
         # Configure MuJoCo filter and dyntype.
         filtertype = 'filterexact' if dyntype_filterexact else 'filter'
@@ -507,6 +515,7 @@ class Ant(legacy_base.Walker):
 
     @composer.cached_property
     def actuators(self):
+<<<<<<< HEAD
         actuator_list = []
         
         # Check for head and abdomen actuators
@@ -542,11 +551,15 @@ class Ant(legacy_base.Walker):
                         actuator_list.append(extend_actuator)
         
         return tuple(actuator_list)
+=======
+        return self._mjcf_root.find_all('actuator')
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
 
     @composer.cached_property
     def mocap_tracking_bodies(self):
         # Which bodies to track?
         bodies = []
+<<<<<<< HEAD
         
         # Core body parts - these should exist
         if self._mjcf_root.find('body', 'thorax') is not None:
@@ -586,11 +599,32 @@ class Ant(legacy_base.Walker):
                         'site': f'tarsus_{prefix}'
                     })
         
+=======
+        bodies.append({'name': 'thorax', 'site': 'thorax'})
+        bodies.append({'name': 'head', 'site': 'head'})
+        bodies.append({'name': 'abdomen', 'site': 'abdomen'})
+        for leg_id in ['1', '2', '3']:
+            for side in ['left', 'right']:
+                prefix = f"{side[0].upper()}{leg_id}"
+                bodies.append({
+                    'name': f'femur_{prefix}',
+                    'site': f'femur_{prefix}'
+                })
+                bodies.append({
+                    'name': f'tibia_{prefix}',
+                    'site': f'tibia_{prefix}'
+                })
+                bodies.append({
+                    'name': f'tarsus_{prefix}',
+                    'site': f'tarsus_{prefix}'
+                })
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
         return bodies
 
     @composer.cached_property
     def end_effectors(self):
         sites = []
+<<<<<<< HEAD
         missing_sites = []
         
         # Check for sites with the format used in the XML: 'tarsus_C1_left'
@@ -619,11 +653,18 @@ class Ant(legacy_base.Walker):
                 sites.append(dummy_site)
                 print("Added a dummy tarsus site to prevent errors")
             
+=======
+        for leg_id in ['1', '2', '3']:
+            for side in ['left', 'right']:
+                prefix = f"{side[0].upper()}{leg_id}"
+                sites.append(self._mjcf_root.find('site', f'tarsus_{prefix}'))
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
         return tuple(sites)
 
     @composer.cached_property
     def appendages(self):
         sites = []
+<<<<<<< HEAD
         # Add ant antennae tips if they exist
         right_antenna = self._mjcf_root.find('site', 'antenna_right')
         left_antenna = self._mjcf_root.find('site', 'antenna_left')
@@ -645,6 +686,14 @@ class Ant(legacy_base.Walker):
             if thorax_site is not None:
                 sites.append(thorax_site)
                 
+=======
+        # Add ant antennae tips
+        sites.append(self._mjcf_root.find('site', 'antenna_right'))
+        sites.append(self._mjcf_root.find('site', 'antenna_left'))
+        # Add all leg tarsi
+        for ee in self.end_effectors:
+            sites.append(ee)
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
         return tuple(sites)
     
     def _build_observables(self):
@@ -665,6 +714,7 @@ class Ant(legacy_base.Walker):
     @composer.cached_property
     def ground_contact_geoms(self):
         foot_geoms = []
+<<<<<<< HEAD
         missing_geoms = []
         
         # Check for geoms with the format used in the XML: 'tarsal_claw_C1_left'
@@ -691,6 +741,12 @@ class Ant(legacy_base.Walker):
                 foot_geoms.append(thorax_geom)
                 print("Warning: Using thorax geom as fallback for ground_contact_geoms")
                 
+=======
+        for leg_id in ['1', '2', '3']:
+            for side in ['left', 'right']:
+                prefix = f"{side[0].upper()}{leg_id}"
+                foot_geoms.append(self._mjcf_root.find('geom', f'tarsal_claw_{prefix}'))
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
         return tuple(foot_geoms)
 
     def apply_action(self, physics, action, random_state):

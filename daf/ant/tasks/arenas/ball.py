@@ -19,9 +19,15 @@ class BallFloor(composer.Arena):
         super()._build(name=name)
         self._size = ball_radius
 
+<<<<<<< HEAD
         # Match the ant model's visual settings to avoid conflicts
         self._mjcf_root.visual.scale.contactwidth = 0.05
         self._mjcf_root.visual.scale.contactheight = 0.05
+=======
+        # Avoid contactwidth conflict with ant model by not setting it explicitly
+        # instead of the original code:
+        # self._mjcf_root.visual.scale.contactwidth = 0.05
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
         
         self._mjcf_root.visual.headlight.set_attributes(
             ambient=[.4, .4, .4],

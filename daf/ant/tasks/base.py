@@ -1,7 +1,11 @@
 """Base task classes for ant tasks."""
 
 import abc
+<<<<<<< HEAD
 from typing import Dict, Optional, Sequence, Union, Type, Any
+=======
+from typing import Dict, Optional, Sequence, Union
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
 
 import numpy as np
 
@@ -13,8 +17,11 @@ from dm_control.composer.observation.observable import MJCFFeature
 from dm_control.mjcf import Physics
 from dm_control.utils import rewards
 
+<<<<<<< HEAD
 _THETA_BIAS = .5
 
+=======
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
 
 class Base(composer.Task, metaclass=abc.ABCMeta):
     """A base class for all ant tasks."""
@@ -137,6 +144,7 @@ class Base(composer.Task, metaclass=abc.ABCMeta):
         """Return a discount in [0, 1]."""
         return 1.0
 
+<<<<<<< HEAD
     def _build_root_entity(self):
         """Build the root entity."""
         # Attach walker to the task's arena
@@ -359,3 +367,28 @@ class Walking(composer.Task):
     @property
     def task_observables(self):
         return self._task_observables 
+=======
+
+class Walking(Base):
+    """Base class for walking tasks."""
+
+    def __init__(self, **kwargs):
+        """Constructor for walking task.
+        
+        Args:
+            **kwargs: Arguments passed to the Base constructor.
+        """
+        super().__init__(**kwargs)
+        
+    def initialize_episode(self, physics, random_state):
+        """Set the ant in its default, upright pose."""
+        physics.bind(self._walker.root_body).quat = [1, 0, 0, 0]
+        physics.bind(self._walker.root_body).pos = [0, 0, 0.1]
+        
+        # Initialize ghost, if any.
+        if self._ghost:
+            ghost_pos = physics.bind(self._walker.root_body).pos.copy()
+            ghost_pos += self._ghost_offset
+            physics.bind(self._ghost.root_body).pos = ghost_pos
+            physics.bind(self._ghost.root_body).quat = [1, 0, 0, 0] 
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05

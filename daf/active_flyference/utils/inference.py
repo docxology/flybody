@@ -17,9 +17,15 @@ def update_beliefs_with_observation(
     Update beliefs using a variational inference approach.
     
     Args:
+<<<<<<< HEAD
         prior_belief: Prior belief over states (shape: [num_states])
         likelihood: Likelihood mapping from states to observations (shape: [num_observations, num_states])
         observation: Current observation (shape: [num_observations])
+=======
+        prior_belief: Prior belief over states
+        likelihood: Likelihood mapping from states to observations
+        observation: Current observation
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
         iterations: Number of inference iterations
         inference_lr: Learning rate for gradient updates
         
@@ -29,6 +35,7 @@ def update_beliefs_with_observation(
     # Initialize posterior with prior
     posterior = prior_belief.copy()
     
+<<<<<<< HEAD
     # Ensure observation has the right shape for matrix operations
     if len(observation.shape) == 1:
         # Convert to column vector if needed
@@ -60,6 +67,18 @@ def update_beliefs_with_observation(
         
         # Update posterior using gradient (prediction error weighted by likelihood)
         gradient = jnp.matmul(jnp.transpose(likelihood), pred_error).flatten()
+=======
+    # Variational inference loop
+    for i in range(iterations):
+        # Encode observation into the same space as likelihood
+        obs_encoded = observation.reshape(-1, 1)
+        
+        # Prediction error between observation and likelihood
+        pred_error = obs_encoded - likelihood @ posterior
+        
+        # Update posterior using prediction error
+        gradient = jnp.transpose(likelihood) @ pred_error
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
         posterior = posterior + inference_lr * gradient
         
         # Ensure posterior is a valid probability distribution

@@ -3,7 +3,10 @@
 from dm_control import composer
 from dm_control.locomotion.walkers import legacy_base
 import numpy as np
+<<<<<<< HEAD
 from dm_control.composer.observation import observable
+=======
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
 
 
 class AntObservables(legacy_base.WalkerObservables):
@@ -54,14 +57,22 @@ class AntObservables(legacy_base.WalkerObservables):
         """Height of the thorax above ground."""
         def get_thorax_height(physics):
             return physics.bind(self._walker.thorax).xpos[2]
+<<<<<<< HEAD
         return observable.Generic(get_thorax_height)
+=======
+        return get_thorax_height
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
 
     @composer.observable
     def abdomen_height(self):
         """Height of the abdomen above ground."""
         def get_abdomen_height(physics):
             return physics.bind(self._walker.abdomen).xpos[2]
+<<<<<<< HEAD
         return observable.Generic(get_abdomen_height)
+=======
+        return get_abdomen_height
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
 
     @composer.observable
     def world_zaxis_hover(self):
@@ -69,14 +80,22 @@ class AntObservables(legacy_base.WalkerObservables):
         def get_world_zaxis_thorax(physics):
             # Returns the world z-axis (0,0,1) in the thorax frame.
             return physics.bind(self._walker.thorax).xmat[[2, 5, 8]]
+<<<<<<< HEAD
         return observable.Generic(get_world_zaxis_thorax)
+=======
+        return get_world_zaxis_thorax
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
 
     @composer.observable
     def world_zaxis(self):
         """World zaxis in thorax frame."""
+<<<<<<< HEAD
         def get_world_zaxis(physics):
             return physics.bind(self._walker.thorax).xmat[[2, 5, 8]]
         return observable.Generic(get_world_zaxis)
+=======
+        return self.world_zaxis_hover
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
 
     @composer.observable
     def world_zaxis_abdomen(self):
@@ -84,7 +103,11 @@ class AntObservables(legacy_base.WalkerObservables):
         def get_world_zaxis_abdomen(physics):
             # Returns the world z-axis (0,0,1) in the abdomen frame.
             return physics.bind(self._walker.abdomen).xmat[[2, 5, 8]]
+<<<<<<< HEAD
         return observable.Generic(get_world_zaxis_abdomen)
+=======
+        return get_world_zaxis_abdomen
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
 
     @composer.observable
     def world_zaxis_head(self):
@@ -92,64 +115,107 @@ class AntObservables(legacy_base.WalkerObservables):
         def get_world_zaxis_head(physics):
             # Returns the world z-axis (0,0,1) in the head frame.
             return physics.bind(self._walker.head).xmat[[2, 5, 8]]
+<<<<<<< HEAD
         return observable.Generic(get_world_zaxis_head)
+=======
+        return get_world_zaxis_head
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
 
     @composer.observable
     def force(self):
         """All force sensors readings."""
         def get_force_readings(physics):
+<<<<<<< HEAD
             sensors = self._walker.mjcf_model.find_all('sensor', 'force')
             if not sensors:
                 return np.zeros(1)
             return physics.bind(sensors).sensordata
         return observable.Generic(get_force_readings)
+=======
+            return physics.bind(
+                    self._walker.mjcf_model.find_all('sensor', 'force')
+                    ).sensordata
+        return get_force_readings
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
 
     @composer.observable
     def touch(self):
         """All touch sensors readings."""
         def get_touch_readings(physics):
+<<<<<<< HEAD
             sensors = self._walker.mjcf_model.find_all('sensor', 'touch')
             if not sensors:
                 return np.zeros(1)
             return physics.bind(sensors).sensordata
         return observable.Generic(get_touch_readings)
+=======
+            return physics.bind(
+                    self._walker.mjcf_model.find_all('sensor', 'touch')
+                    ).sensordata
+        return get_touch_readings
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
 
     @composer.observable
     def accelerometer(self):
         """Accelerometer readings."""
         def get_accelerometer(physics):
+<<<<<<< HEAD
             sensors = self._walker.mjcf_model.find_all('sensor', 'accelerometer')
             if not sensors:
                 return np.zeros(3)
             return physics.bind(sensors).sensordata
         return observable.Generic(get_accelerometer)
+=======
+            return physics.bind(
+                    self._walker.mjcf_model.find_all('sensor', 'accelerometer')
+                    ).sensordata
+        return get_accelerometer
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
 
     @composer.observable
     def gyro(self):
         """Gyroscope readings."""
         def get_gyro(physics):
+<<<<<<< HEAD
             sensors = self._walker.mjcf_model.find_all('sensor', 'gyro')
             if not sensors:
                 return np.zeros(3)
             return physics.bind(sensors).sensordata
         return observable.Generic(get_gyro)
+=======
+            return physics.bind(
+                    self._walker.mjcf_model.find_all('sensor', 'gyro')
+                    ).sensordata
+        return get_gyro
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
 
     @composer.observable
     def velocimeter(self):
         """Velocimeter readings."""
         def get_velocimeter(physics):
+<<<<<<< HEAD
             sensors = self._walker.mjcf_model.find_all('sensor', 'velocimeter')
             if not sensors:
                 return np.zeros(3)
             return physics.bind(sensors).sensordata
         return observable.Generic(get_velocimeter)
+=======
+            return physics.bind(
+                    self._walker.mjcf_model.find_all('sensor', 'velocimeter')
+                    ).sensordata
+        return get_velocimeter
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
 
     @composer.observable
     def actuator_activation(self):
         """Actuator activation state."""
         def get_act(physics):
             return physics.data.act
+<<<<<<< HEAD
         return observable.Generic(get_act)
+=======
+        return get_act
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
 
     @composer.observable
     def appendages_pos(self):
@@ -167,11 +233,19 @@ class AntObservables(legacy_base.WalkerObservables):
                 # Apply thorax rotation.
                 rel_pos.append(thorax_mat_inv.dot(pos))
             return np.hstack(rel_pos)
+<<<<<<< HEAD
         return observable.Generic(relative_pos_in_egocentric_frame)
 
     @composer.observable
     def self_contact(self):
         """Contact forces between the ant's own body parts."""
+=======
+        return relative_pos_in_egocentric_frame
+
+    @composer.observable
+    def self_contact(self):
+        """Contact forces between the fly's own body parts."""
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
         def sum_body_contact_forces(physics):
             # For all pairs of geoms, if both are part of the ant's body, get the force.
             body_force = np.zeros(6)
@@ -190,7 +264,11 @@ class AntObservables(legacy_base.WalkerObservables):
                     mjlib.mj_contactForce(mj_model, mj_data, c, force)
                     body_force += force
             return body_force
+<<<<<<< HEAD
         return observable.Generic(sum_body_contact_forces)
+=======
+        return sum_body_contact_forces
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
 
     @property
     def vestibular(self):
@@ -200,7 +278,11 @@ class AntObservables(legacy_base.WalkerObservables):
     @property
     def proprioception(self):
         """Proprioceptive sensations: joint_pos, joint_vel."""
+<<<<<<< HEAD
         return [self.joints_pos, self.joints_vel]
+=======
+        return [self.joint_pos, self.joint_vel]
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
 
     @property
     def orientation(self):
@@ -211,27 +293,41 @@ class AntObservables(legacy_base.WalkerObservables):
     def right_eye(self):
         """Right eye image."""
         def get_right_eye_image(physics):
+<<<<<<< HEAD
             if self._walker.right_eye is None:
                 return np.zeros((16, 16, 3), dtype=np.uint8)
+=======
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
             return physics.render(
                 camera_id=self._walker.right_eye.full_identifier,
                 width=self._eye_camera_size,
                 height=self._eye_camera_size,
                 depth=False)
+<<<<<<< HEAD
         return observable.Generic(get_right_eye_image)
+=======
+        return get_right_eye_image
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
 
     @composer.observable
     def left_eye(self):
         """Left eye image."""
         def get_left_eye_image(physics):
+<<<<<<< HEAD
             if self._walker.left_eye is None:
                 return np.zeros((16, 16, 3), dtype=np.uint8)
+=======
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
             return physics.render(
                 camera_id=self._walker.left_eye.full_identifier,
                 width=self._eye_camera_size,
                 height=self._eye_camera_size,
                 depth=False)
+<<<<<<< HEAD
         return observable.Generic(get_left_eye_image)
+=======
+        return get_left_eye_image
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
 
     @composer.observable
     def end_effectors_pos(self):
@@ -260,7 +356,11 @@ class AntObservables(legacy_base.WalkerObservables):
                 
             return np.hstack(rel_pos)
             
+<<<<<<< HEAD
         return observable.Generic(get_end_effectors_pos)
+=======
+        return get_end_effectors_pos
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
 
     @composer.observable
     def joints_pos(self):
@@ -283,7 +383,11 @@ class AntObservables(legacy_base.WalkerObservables):
                 # Default empty array if no joints found
                 return np.zeros(1)
         
+<<<<<<< HEAD
         return observable.Generic(get_joints_pos)
+=======
+        return get_joints_pos
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
         
     @composer.observable
     def joints_vel(self):
@@ -306,7 +410,11 @@ class AntObservables(legacy_base.WalkerObservables):
                 # Default empty array if no joints found
                 return np.zeros(1)
         
+<<<<<<< HEAD
         return observable.Generic(get_joints_vel)
+=======
+        return get_joints_vel
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
 
     @composer.observable
     def egocentric_camera(self):
@@ -329,17 +437,25 @@ class AntObservables(legacy_base.WalkerObservables):
                 print(f"Warning: Failed to render egocentric camera: {e}")
                 return np.zeros((16, 16, 3), dtype=np.uint8)
                 
+<<<<<<< HEAD
         return observable.Generic(get_egocentric_image)
+=======
+        return get_egocentric_image
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
 
     # Add dummy implementation for joint_angles which might be expected
     @composer.observable
     def joint_angles(self):
         """Joint angles (same as joints_pos)."""
+<<<<<<< HEAD
         def get_joint_angles(physics):
             if hasattr(self, 'joints_pos'):
                 return self.joints_pos(physics)
             return np.zeros(1)
         return observable.Generic(get_joint_angles)
+=======
+        return self.joints_pos
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
         
     # Add dummy implementation for body_velocities
     @composer.observable
@@ -352,6 +468,7 @@ class AntObservables(legacy_base.WalkerObservables):
                 angular_vel = physics.bind(self._walker.thorax).cvel[3:6]
                 return np.concatenate([linear_vel, angular_vel])
             return np.zeros(6)  # Fallback
+<<<<<<< HEAD
         return observable.Generic(get_body_velocities)
 
     @composer.observable
@@ -371,3 +488,6 @@ class AntObservables(legacy_base.WalkerObservables):
                 return self.joints_vel(physics)
             return np.zeros(1)  # Fallback if no data available
         return observable.Generic(get_joint_vel) 
+=======
+        return get_body_velocities 
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05

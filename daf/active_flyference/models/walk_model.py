@@ -20,8 +20,12 @@ class WalkOnBallModel(GenerativeModel):
         self,
         num_states: int = 64,
         num_actions: int = 8,
+<<<<<<< HEAD
         num_observations: int = 23,  # Update to match our actual observation vector
         action_dim: int = 59,  # Full action space dimension for the fly
+=======
+        leg_action_dim: int = 6,  # Simplified action space per leg
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
         precision: float = 2.0,
         learning_rate: float = 0.01,
         action_mapping_file: Optional[str] = None
@@ -32,12 +36,17 @@ class WalkOnBallModel(GenerativeModel):
         Args:
             num_states: Number of discrete states in the model (representing position/orientation)
             num_actions: Number of discrete actions (simplified control primitives)
+<<<<<<< HEAD
             num_observations: Number of observation dimensions
             action_dim: Dimensionality of the full action space (59 for walk_on_ball task)
+=======
+            leg_action_dim: Dimensionality of individual leg controls
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
             precision: Precision parameter for action selection
             learning_rate: Learning rate for updating the model parameters
             action_mapping_file: Optional file containing the action mapping matrix
         """
+<<<<<<< HEAD
         # Actual observation dimensions from our environment:
         # - 16 proprioceptive joints (simplified from leg joints)
         # - 2 ball velocity components (x, y)
@@ -46,11 +55,22 @@ class WalkOnBallModel(GenerativeModel):
         
         # Update to the correct observation size
         num_observations = 21
+=======
+        # The observation space includes:
+        # - Proprioceptive feedback from each leg (6 legs * 3 joints)
+        # - Ball rotation sensors (2)
+        # - Body orientation sensors (3)
+        num_observations = 6 * 3 + 2 + 3
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
         
         # Call parent constructor
         super().__init__(num_states, num_observations, num_actions, precision)
         
+<<<<<<< HEAD
         self.action_dim = action_dim
+=======
+        self.leg_action_dim = leg_action_dim
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
         self.learning_rate = learning_rate
         
         # Create more informative state representation
@@ -90,6 +110,7 @@ class WalkOnBallModel(GenerativeModel):
         Args:
             action_mapping_file: Optional file containing the action mapping matrix
         """
+<<<<<<< HEAD
         # The full action space has 59 dimensions:
         # - 6 adhere_claw actions (one per leg)
         # - 3 head actions (head_abduct, head_twist, head)
@@ -97,19 +118,34 @@ class WalkOnBallModel(GenerativeModel):
         # - 48 leg joint actions (8 per leg * 6 legs)
         
         # Create labels for our simplified action space
+=======
+        # Full action space would be 6 legs with multiple joints
+        # We simplify to 8 basic movement patterns: 
+        # forward, backward, rotate-left, rotate-right, 
+        # sidestep-left, sidestep-right, stop, stabilize
+        
+        # Create labels for actions
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
         self.action_labels = [
             'forward', 'backward', 'rotate_left', 'rotate_right',
             'sidestep_left', 'sidestep_right', 'stop', 'stabilize'
         ]
         
         # Create mapping from discrete actions to continuous control vector
+<<<<<<< HEAD
         self.action_mapping_matrix = jnp.zeros((self.num_actions, self.action_dim))
+=======
+        # Each action maps to a vector of shape (6 legs * leg_action_dim)
+        total_action_dim = 6 * self.leg_action_dim
+        self.action_mapping_matrix = jnp.zeros((self.num_actions, total_action_dim))
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
         
         # If a mapping file is provided, load it
         if action_mapping_file and os.path.exists(action_mapping_file):
             self.action_mapping_matrix = jnp.array(np.load(action_mapping_file))
         else:
             # Otherwise, create a simplified mapping
+<<<<<<< HEAD
             # These are placeholder patterns that would be refined in a real implementation
             
             # Define some default values for non-leg actions
@@ -249,6 +285,49 @@ class WalkOnBallModel(GenerativeModel):
             print(f"Action mapping matrix shape: {self.action_mapping_matrix.shape}")
             assert self.action_mapping_matrix.shape == (self.num_actions, self.action_dim), \
                 f"Expected shape ({self.num_actions}, {self.action_dim}) but got {self.action_mapping_matrix.shape}"
+=======
+            # These are simplified patterns that would be refined in real implementation
+            
+            # Forward walking pattern (tripod gait)
+            self.action_mapping_matrix = self.action_mapping_matrix.at[0].set(
+                jnp.array([0.5, 0.3, 0.2] * 2 + [-0.3, -0.1, -0.1] * 2 + [0.5, 0.3, 0.2] * 2)
+            )
+            
+            # Backward walking pattern (reverse tripod)
+            self.action_mapping_matrix = self.action_mapping_matrix.at[1].set(
+                jnp.array([-0.5, -0.3, -0.2] * 2 + [0.3, 0.1, 0.1] * 2 + [-0.5, -0.3, -0.2] * 2)
+            )
+            
+            # Rotate left pattern
+            self.action_mapping_matrix = self.action_mapping_matrix.at[2].set(
+                jnp.array([0.3, 0.2, 0.1] * 3 + [-0.3, -0.2, -0.1] * 3)
+            )
+            
+            # Rotate right pattern
+            self.action_mapping_matrix = self.action_mapping_matrix.at[3].set(
+                jnp.array([-0.3, -0.2, -0.1] * 3 + [0.3, 0.2, 0.1] * 3)
+            )
+            
+            # Sidestep left pattern
+            self.action_mapping_matrix = self.action_mapping_matrix.at[4].set(
+                jnp.array([0.0, 0.3, 0.2] * 3 + [0.0, -0.3, -0.2] * 3)
+            )
+            
+            # Sidestep right pattern
+            self.action_mapping_matrix = self.action_mapping_matrix.at[5].set(
+                jnp.array([0.0, -0.3, -0.2] * 3 + [0.0, 0.3, 0.2] * 3)
+            )
+            
+            # Stop pattern (return to neutral)
+            self.action_mapping_matrix = self.action_mapping_matrix.at[6].set(
+                jnp.zeros(total_action_dim)
+            )
+            
+            # Stabilize pattern (slightly bend legs for stability)
+            self.action_mapping_matrix = self.action_mapping_matrix.at[7].set(
+                jnp.array([0.0, 0.1, 0.2] * 6)
+            )
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
     
     def _setup_observation_discretization(self) -> None:
         """Set up discretization bins for continuous observations."""
@@ -323,6 +402,7 @@ class WalkOnBallModel(GenerativeModel):
     
     def observation_mapping(self, environment_observation: Any) -> jnp.ndarray:
         """
+<<<<<<< HEAD
         Map from environment observations to the model's observation space.
         
         Args:
@@ -386,10 +466,52 @@ class WalkOnBallModel(GenerativeModel):
         print(f"Final observation vector shape: {obs_vector.shape}")
         
         # Convert to jax numpy array
+=======
+        Map environment observations to the format expected by the generative model.
+        
+        Args:
+            environment_observation: Observation from the flybody environment
+            
+        Returns:
+            Observation vector in the format expected by the model
+        """
+        # Extract relevant components from the environment observation
+        # Depending on the exact format from the environment, this may need adjustment
+        
+        obs_vector = []
+        
+        # Process proprioceptive feedback (leg joint angles)
+        if isinstance(environment_observation, dict) and 'joints' in environment_observation:
+            joint_angles = environment_observation['joints']
+            # Take the first 18 values (6 legs * 3 joints)
+            proprioception = joint_angles[:18]
+            obs_vector.extend(proprioception)
+        else:
+            # If not available, use zeros
+            obs_vector.extend([0.0] * 18)
+        
+        # Process ball rotation
+        if isinstance(environment_observation, dict) and 'ball_rotation' in environment_observation:
+            ball_rotation = environment_observation['ball_rotation']
+            obs_vector.extend(ball_rotation)
+        else:
+            # If not available, use zeros
+            obs_vector.extend([0.0, 0.0])
+        
+        # Process body orientation
+        if isinstance(environment_observation, dict) and 'orientation' in environment_observation:
+            orientation = environment_observation['orientation']
+            obs_vector.extend(orientation)
+        else:
+            # If not available, use zeros
+            obs_vector.extend([0.0, 0.0, 0.0])
+        
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
         return jnp.array(obs_vector)
     
     def action_mapping(self, model_action: int) -> np.ndarray:
         """
+<<<<<<< HEAD
         Map from model's discrete action to environment action.
         
         Args:
@@ -411,6 +533,24 @@ class WalkOnBallModel(GenerativeModel):
         print(f"Selected action: {self.action_labels[model_action]}, shape: {action_vector.shape}")
         
         return action_vector
+=======
+        Map model actions to the format expected by the environment.
+        
+        Args:
+            model_action: Action selected by the model (index)
+            
+        Returns:
+            Action in the format expected by the environment
+        """
+        # Convert the discrete action to the continuous action vector using the mapping matrix
+        continuous_action = self.action_mapping_matrix[model_action]
+        
+        # Note: In a real implementation with flybody, this might need scaling and reshaping
+        # depending on the exact action space expected by the environment
+        
+        # Convert to numpy array for environment
+        return np.array(continuous_action)
+>>>>>>> b6de4f487bf9d84c86a28b0ffb245143db607e05
     
     def update_from_experience(self, 
                               state: int, 
